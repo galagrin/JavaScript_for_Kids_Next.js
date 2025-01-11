@@ -38,7 +38,6 @@ npm run dev
 - TypeScript
 - Tailwind CSS
 - Prettier (с плагином @trivago/prettier-plugin-sort-imports)
-- PostCSS
 
 ## API
 
