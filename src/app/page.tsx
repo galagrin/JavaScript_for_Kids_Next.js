@@ -1,30 +1,30 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { fetchAllArrays } from 'services/apiTypes';
-import { ApiTypes } from 'types/api';
+import { useEffect } from 'react';
+import useDataStore from 'store/useDataStore';
 
 export default function Home() {
-    const [data, setData] = useState<ApiTypes[]>([]);
-
+    const { arraysList, loading, error, fetchAllArraysList } = useDataStore();
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const arrays = await fetchAllArrays();
-                setData(arrays);
-            } catch (error) {
-                console.error('Ошибка при получении данных:', error);
-            }
-        };
-        fetchData();
-    }, []);
+        fetchAllArraysList();
+    }, [fetchAllArraysList]);
 
+    if (loading) {
+        return <div>Идет загрузка</div>;
+    }
+    if (error) {
+        return <div>Ошибка: {error}</div>;
+    }
     return (
         <>
             <h1>JS for Kids</h1>
             <ul>
-                {data.map(({ name, description }) => {
-                    return <li key={name}>{description}</li>;
+                {arraysList.map(({ id, name, description }) => {
+                    return (
+                        <li key={id}>
+                            {description}, {name}
+                        </li>
+                    );
                 })}
             </ul>
         </>
