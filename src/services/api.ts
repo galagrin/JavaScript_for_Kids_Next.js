@@ -13,3 +13,25 @@ export const fetchAllArrays = async (): Promise<ApiTypes[]> => {
         throw error;
     }
 };
+
+export const fetchAllObjects = async (): Promise<ApiTypes[]> => {
+    try {
+        const response = await axios.get<ApiTypes[]>(`${API_URL}/objects`);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Ошибка при получении данных:', error);
+        throw error;
+    }
+};
+
+export const fetchAllStrings = async (): Promise<ApiTypes[]> => {
+    try {
+        const response = await axios.get<ApiTypes[]>(`${API_URL}/strings`);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Ошибка при получении данных:', error);
+        throw error;
+    }
+};
