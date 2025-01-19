@@ -4,6 +4,8 @@ import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import useDataStore from 'store/useDataStore';
 
+import { Card } from '@/components/Card/Card';
+
 export default function Home() {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
@@ -40,6 +42,7 @@ export default function Home() {
                     );
                 })}
             </ul>
+            <Card />
         </>
     );
 }
