@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { ApiTypes } from 'types/apiTypes';
 
 import styles from './Card.module.css';
 
-export const Card = () => {
+interface CardProps {
+    data: ApiTypes;
+}
+export const Card = ({ data }: CardProps) => {
     const [isFlipped, setIsFlipped] = useState(false);
 
     const handleClick = () => {
@@ -12,8 +16,10 @@ export const Card = () => {
     return (
         <div className={styles.scene}>
             <div className={`${styles.card} ${isFlipped ? styles['is-flipped'] : ''}`} onClick={handleClick}>
-                <div className={`${styles['card__face']} ${styles['card__face--front']}`}>front</div>
-                <div className={`${styles['card__face']} ${styles['card__face--back']}`}>back</div>
+                <div className={`${styles['card__face']} ${styles['card__face--front']}`}>{data.name}</div>
+                <div className={`${styles['card__face']} ${styles['card__face--back']}`}>
+                    <div>{data.description}</div>
+                </div>
             </div>
         </div>
     );
