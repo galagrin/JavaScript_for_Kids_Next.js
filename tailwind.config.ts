@@ -9,7 +9,13 @@ export default {
                 background: 'var(--background)',
                 foreground: 'var(--foreground)',
             },
+            backdropBlur: {
+                '20': '20px',
+            },
         },
+    },
+    variants: {
+        backdropFilter: ['responsive'],
     },
     plugins: [],
 } satisfies Config;
