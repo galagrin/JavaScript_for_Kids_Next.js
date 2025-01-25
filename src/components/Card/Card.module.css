@@ -1,6 +1,6 @@
 .scene {
-    width: 300px;
-    height: 350px;
+    width: 350px;
+    height: 450px;
     margin: 40px 0;
     perspective: 600px;
 }
@@ -30,9 +30,11 @@
     backface-visibility: hidden;
     overflow: hidden;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 10px;
+    gap: 20px;
     box-sizing: border-box;
 }
 .card__face div {
