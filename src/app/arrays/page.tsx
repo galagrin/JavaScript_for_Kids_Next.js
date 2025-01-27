@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { CgArrowLeftO, CgArrowRightO } from 'react-icons/cg';
 import useDataStore from 'store/useDataStore';
 
 import { Card } from '@/components/Card/Card';
+
+import { ArrowButtonLeft, ArrowButtonRight } from 'ui/ArrowButton/ArrowButton';
 
 export default function ArraysPage() {
     const { arraysList, fetchAllArraysList, loadingAllArrays, errorAllArrays } = useDataStore();
@@ -26,11 +27,11 @@ export default function ArraysPage() {
     }
 
     const handleNextCard = () => {
-        setIsFlipped(false)
+        setIsFlipped(false);
         setCardIndex((prev) => (prev + 1) % arraysList.length);
     };
     const handlePrevCard = () => {
-        setIsFlipped(false)
+        setIsFlipped(false);
         setCardIndex((prev) => (prev - 1 + arraysList.length) % arraysList.length);
     };
 
@@ -40,9 +41,10 @@ export default function ArraysPage() {
 
             {arraysList.length > 0 ? (
                 <div className="flex items-center gap-5">
-                    <CgArrowLeftO onClick={handlePrevCard} />
-                    <Card data={arraysList[cardIndex]} isFlipped ={isFlipped} setIsFlipped={setIsFlipped} />
-                    <CgArrowRightO onClick={handleNextCard} />
+                    <ArrowButtonLeft onClick={handlePrevCard} />
+
+                    <Card data={arraysList[cardIndex]} isFlipped={isFlipped} setIsFlipped={setIsFlipped} />
+                    <ArrowButtonRight onClick={handleNextCard} />
                 </div>
             ) : (
                 <div>Нет доступных данных.</div>
