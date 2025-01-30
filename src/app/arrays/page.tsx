@@ -5,7 +5,7 @@ import useDataStore from 'store/useDataStore';
 
 import { Card } from '@/components/Card/Card';
 
-import { ArrowButtonLeft, ArrowButtonRight } from 'ui/ArrowButton/ArrowButton';
+import { ArrowButton } from 'ui/ArrowButton/ArrowButton';
 
 export default function ArraysPage() {
     const { arraysList, fetchAllArraysList, loadingAllArrays, errorAllArrays } = useDataStore();
@@ -41,10 +41,10 @@ export default function ArraysPage() {
 
             {arraysList.length > 0 ? (
                 <div className="flex items-center gap-5">
-                    <ArrowButtonLeft onClick={handlePrevCard} />
+                    <ArrowButton onClick={handlePrevCard} direction="Left" />
 
                     <Card data={arraysList[cardIndex]} isFlipped={isFlipped} setIsFlipped={setIsFlipped} />
-                    <ArrowButtonRight onClick={handleNextCard} />
+                    <ArrowButton onClick={handleNextCard} direction="Right" />
                 </div>
             ) : (
                 <div>Нет доступных данных.</div>

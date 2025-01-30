@@ -8,7 +8,11 @@ export default function Home() {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
-    const { arraysList, loadingAllArrays, errorAllArrays, fetchAllArraysList } = useDataStore();
+    // const { arraysList, loadingAllArrays, errorAllArrays, fetchAllArraysList } = useDataStore();
+    const loadingAllArrays = useDataStore((state) => state.loadingAllArrays);
+    const fetchAllArraysList = useDataStore((state) => state.fetchAllArraysList);
+    const errorAllArrays = useDataStore((state) => state.errorAllArrays);
+
     useEffect(() => {
         setMounted(true);
         fetchAllArraysList();
