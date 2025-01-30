@@ -31,27 +31,3 @@ export const ArrowButton = ({ onClick, direction }: ArrowButtonProps) => {
         </IconContext.Provider>
     );
 };
-
-// export const ArrowButtonRight = ({ onClick }: ArrowButtonProps) => {
-//     useEffect(() => {
-//         const handleArrowRight = (event: KeyboardEvent) => {
-//             if (event.key === 'ArrowRight') {
-//                 onClick();
-//             }
-//         };
-//         document.addEventListener('keydown', handleArrowRight);
-//         return () => {
-//             document.removeEventListener('keydown', handleArrowRight);
-//         };
-//     }, [onClick]);
-//     return (
-//         <IconContext.Provider value={{ size: '2em' }}>
-//             <div>
-//                 <CgArrowRightO
-//                     onClick={onClick}
-//                     className="text-gray-500 transition-transform duration-200 hover:text-[#FDE69C] hover:scale-110 active:scale-90"
-//                 />
-//             </div>
-//         </IconContext.Provider>
-//     );
-// };
