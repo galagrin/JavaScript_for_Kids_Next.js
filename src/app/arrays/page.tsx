@@ -11,6 +11,7 @@ export default function ArraysPage() {
     const { arraysList, fetchAllArraysList, loadingAllArrays, errorAllArrays } = useDataStore();
     const [cardIndex, setCardIndex] = useState(0);
     const [isFlipped, setIsFlipped] = useState(false);
+    const [rolledOut, setRolledOut] = useState(false);
 
     useEffect(() => {
         if (arraysList.length === 0) {
@@ -28,10 +29,15 @@ export default function ArraysPage() {
 
     const handleNextCard = () => {
         setIsFlipped(false);
+        setRolledOut(true);
+        setTimeout(() => setRolledOut(false), 700);
         setCardIndex((prev) => (prev + 1) % arraysList.length);
     };
     const handlePrevCard = () => {
         setIsFlipped(false);
+        setRolledOut(true);
+        setTimeout(() => setRolledOut(false), 700);
+
         setCardIndex((prev) => (prev - 1 + arraysList.length) % arraysList.length);
     };
 
@@ -43,7 +49,7 @@ export default function ArraysPage() {
                 <div className="flex items-center gap-5">
                     <ArrowButton onClick={handlePrevCard} direction="Left" />
 
-                    <Card data={arraysList[cardIndex]} isFlipped={isFlipped} setIsFlipped={setIsFlipped} />
+                    <Card data={arraysList[cardIndex]} isFlipped={isFlipped} setIsFlipped={setIsFlipped} rolledOut={rolledOut} />
                     <ArrowButton onClick={handleNextCard} direction="Right" />
                 </div>
             ) : (
