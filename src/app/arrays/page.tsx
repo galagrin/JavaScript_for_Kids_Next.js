@@ -6,6 +6,7 @@ import useDataStore from 'store/useDataStore';
 import { Card } from '@/components/Card/Card';
 
 import { ArrowButton } from 'ui/ArrowButton/ArrowButton';
+import { ProgressBar } from 'ui/ProgressBar/ProgressBar';
 
 export default function ArraysPage() {
     const { arraysList, fetchAllArraysList, loadingAllArrays, errorAllArrays } = useDataStore();
@@ -32,6 +33,17 @@ export default function ArraysPage() {
         setRolledOut(true);
         setTimeout(() => setRolledOut(false), 700);
         setCardIndex((prev) => (prev + 1) % arraysList.length);
+
+        setCardIndex((prev) => {
+            const newIndex = (prev + 1) % arraysList.length;
+            // Если мы вернулись к первой карточке, сбрасываем прогресс
+            if (newIndex === 0) {
+                setProgress(0);
+            } else {
+                setProgress((prevProgress) => prevProgress + 1);
+            }
+            return newIndex;
+        });
     };
     const handlePrevCard = () => {
         setIsFlipped(false);
@@ -39,19 +51,34 @@ export default function ArraysPage() {
         setTimeout(() => setRolledOut(false), 700);
 
         setCardIndex((prev) => (prev - 1 + arraysList.length) % arraysList.length);
+
+        setCardIndex((prev) => {
+            const newIndex = (prev - 1 + arraysList.length) % arraysList.length;
+            // Если мы вернулись к последней карточке, уменьшаем прогресс
+            if (newIndex === arraysList.length - 1 && progress > 0) {
+                setProgress((prevProgress) => prevProgress - 1);
+            }
+            return newIndex;
+        });
     };
+
+    const [progress, setProgress] = useState(0);
 
     return (
         <>
-            <h1>Изучаем методы массивов</h1>
+            <h1 className="text-center">Изучаем методы массивов</h1>
 
             {arraysList.length > 0 ? (
-                <div className="flex items-center gap-5">
-                    <ArrowButton onClick={handlePrevCard} direction="Left" />
-
-                    <Card data={arraysList[cardIndex]} isFlipped={isFlipped} setIsFlipped={setIsFlipped} rolledOut={rolledOut} />
-                    <ArrowButton onClick={handleNextCard} direction="Right" />
-                </div>
+                <>
+                    <div className="flex items-center gap-5 justify-center">
+                        <ArrowButton onClick={handlePrevCard} direction="Left" />
+                        <Card data={arraysList[cardIndex]} isFlipped={isFlipped} setIsFlipped={setIsFlipped} rolledOut={rolledOut} />
+                        <ArrowButton onClick={handleNextCard} direction="Right" />
+                    </div>
+                    <div className="flex  justify-center">
+                        <ProgressBar value={progress} max={arraysList.length} />
+                    </div>
+                </>
             ) : (
                 <div>Нет доступных данных.</div>
             )}
