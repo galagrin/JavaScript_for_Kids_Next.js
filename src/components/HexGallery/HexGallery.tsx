@@ -1,57 +1,22 @@
 import styles from './HexGallery.module.css';
+import staticData from './data.json';
 
-export const HexGallery = () => {
+interface HexItem {
+    id: number;
+    title: string;
+    btnTitle: string;
+}
+export const HexGallery: React.FC = () => {
     return (
         <section className={styles.hexagongallery}>
-            <div className={styles.hex}>
-                <div className={styles.content}>
-                    <h2 className={styles.title}>Title 1</h2>
-
-                    <button className={styles.hexbutton}>View More</button>
+            {staticData.map((item: HexItem) => (
+                <div className={styles.hex} key={item.id}>
+                    <div className={styles.content}>
+                        <h2 className={styles.title}>{item.title}</h2>
+                        <button className={styles.hexbutton}>{item.btnTitle}</button>
+                    </div>
                 </div>
-            </div>
-            <div className={styles.hex}>
-                <div className={styles.content}>
-                    <h2>Title 1</h2>
-
-                    <button className={styles.hexbutton}>View More</button>
-                </div>
-            </div>
-            <div className={styles.hex}>
-                <div className={styles.content}>
-                    <h2 className={styles.title}>Title 1</h2>
-
-                    <button className={styles.hexbutton}>View More</button>
-                </div>
-            </div>
-            <div className={styles.hex}>
-                <div className={styles.content}>
-                    <h2 className={styles.title}>Title 1</h2>
-
-                    <button className={styles.hexbutton}>View More</button>
-                </div>
-            </div>
-            <div className={styles.hex}>
-                <div className={styles.content}>
-                    <h2 className={styles.title}>Title 1</h2>
-
-                    <button className={styles.hexbutton}>View More</button>
-                </div>
-            </div>
-            <div className={styles.hex}>
-                <div className={styles.content}>
-                    <h2 className={styles.title}>Title 1</h2>
-
-                    <button className={styles.hexbutton}>View More</button>
-                </div>
-            </div>
-            <div className={styles.hex}>
-                <div className={styles.content}>
-                    <h2 className={styles.title}>Title 1</h2>
-
-                    <button className={styles.hexbutton}>View More</button>
-                </div>
-            </div>
+            ))}
         </section>
     );
 };
