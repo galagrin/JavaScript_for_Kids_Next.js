@@ -1,4 +1,4 @@
-import styles from './HexGallery.module.css';
+import styles from './HexGallery.module.scss';
 import staticData from './data.json';
 
 interface HexItem {

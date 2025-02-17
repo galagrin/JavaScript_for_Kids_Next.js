@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { ApiTypes } from 'types/apiTypes';
-import styles from './Card.module.css';
+
+import styles from './Card.module.scss';
+
 interface CardProps {
     data: ApiTypes;
     isFlipped: boolean;

@@ -36,7 +36,6 @@ export default function ArraysPage() {
 
         setCardIndex((prev) => {
             const newIndex = (prev + 1) % arraysList.length;
-            // Если мы вернулись к первой карточке, сбрасываем прогресс
             if (newIndex === 0) {
                 setProgress(0);
             } else {
@@ -54,7 +53,6 @@ export default function ArraysPage() {
 
         setCardIndex((prev) => {
             const newIndex = (prev - 1 + arraysList.length) % arraysList.length;
-            // Если мы вернулись к последней карточке, уменьшаем прогресс
             if (newIndex === arraysList.length - 1 && progress > 0) {
                 setProgress((prevProgress) => prevProgress - 1);
             }

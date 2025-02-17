@@ -35,7 +35,7 @@ const useDataStore = create<DataStore>()(
                 },
             }),
             {
-                name: 'data-storage', // Имя для хранения в localStorage
+                name: 'data-storage',
             }
         )
     )
