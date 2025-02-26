@@ -1,3 +1,5 @@
+@use '@/styles/colors' as colors;
+
 .scene {
     width: 350px;
     height: 450px;
@@ -37,11 +39,11 @@
 }
 
 .card__face--front {
-    background: rgb(226, 179, 179);
+    background: colors.$cardFrontBackground;
 }
 
 .card__face--back {
-    background: rgb(178, 178, 220);
+    background: colors.$cardBackBackground;
     transform: rotateY(180deg);
 }
 

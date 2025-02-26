@@ -24,7 +24,8 @@
             "@/app/*": ["app/*"],
             "@/components/*": ["components/*"],
             "@/assets/*": ["assets/*"],
-            "@/store/*": ["store/*"]
+            "@/store/*": ["store/*"],
+            "@/styles/*": ["styles/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

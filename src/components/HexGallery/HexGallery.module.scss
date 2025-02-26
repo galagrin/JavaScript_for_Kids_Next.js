@@ -1,3 +1,5 @@
+@use '@/styles/colors' as colors;
+
 .hexagongallery {
     margin: 0 auto;
     margin-top: 50px;
@@ -14,7 +16,7 @@
     position: relative;
     width: 240px;
     height: 265px;
-    background-color: #e2e8f0;
+    background-color: colors.$hexDefault;
     -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     transition:
@@ -24,10 +26,11 @@
 }
 
 .hex:hover {
-    background-color: #555; 
-    transform: scale(1.05); 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); 
+    background-color: colors.$hexHover;
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px colors.$hexHoverShadow;
 }
+
 .hex:first-child {
     grid-row-start: 1;
     grid-column: 2 / span 2;
@@ -69,17 +72,17 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: white;
+    color: colors.$hexContentColor;
     opacity: 0.2;
-    transition: opacity 0.3s; 
+    transition: opacity 0.3s;
 }
 
 .hex:hover .content {
-    opacity: 1; 
+    opacity: 1;
 }
 
 .hexbutton {
-    background-color: #fde186;
+    background-color: colors.$hexButtonBackground;
     border-radius: 5px;
     color: white;
     padding: 10px 20px;
@@ -93,7 +96,7 @@
 }
 
 .hexbutton:hover {
-    background-color: darkcyan;
+    background-color: colors.$hexButtonHoverBackground;
 }
 
 .title {

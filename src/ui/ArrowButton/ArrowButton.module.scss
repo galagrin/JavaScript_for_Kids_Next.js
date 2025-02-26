@@ -1,9 +1,11 @@
+@use '@/styles/colors' as colors;
+
 .arrowButton {
-    color: #6b7280;
+    color: colors.$arrowDefault;
     transition: transform 0.2s;
 
     &:hover {
-        color: #fde69c;
+        color: colors.$arrowHover;
         transform: scale(1.1);
     }
 
