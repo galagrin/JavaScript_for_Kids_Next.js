@@ -13,12 +13,18 @@ export default function ArraysPage() {
     const [cardIndex, setCardIndex] = useState(0);
     const [isFlipped, setIsFlipped] = useState(false);
     const [rolledOut, setRolledOut] = useState(false);
+    const [progress, setProgress] = useState(0); // Прогресс
 
     useEffect(() => {
         if (arraysList.length === 0) {
             fetchAllArraysList();
         }
-    }, [fetchAllArraysList, arraysList.length]);
+    }, []);
+
+    useEffect(() => {
+        // Обновляем прогресс в зависимости от текущего индекса карточки
+        setProgress(cardIndex);
+    }, [cardIndex]);
 
     if (loadingAllArrays) {
         return <div>Загрузка данных...</div>;
@@ -32,35 +38,20 @@ export default function ArraysPage() {
         setIsFlipped(false);
         setRolledOut(true);
         setTimeout(() => setRolledOut(false), 700);
-        setCardIndex((prev) => (prev + 1) % arraysList.length);
 
-        setCardIndex((prev) => {
-            const newIndex = (prev + 1) % arraysList.length;
-            if (newIndex === 0) {
-                setProgress(0);
-            } else {
-                setProgress((prevProgress) => prevProgress + 1);
-            }
-            return newIndex;
-        });
+        setCardIndex((prev) => (prev + 1) % arraysList.length);
     };
+
     const handlePrevCard = () => {
         setIsFlipped(false);
         setRolledOut(true);
         setTimeout(() => setRolledOut(false), 700);
 
-        setCardIndex((prev) => (prev - 1 + arraysList.length) % arraysList.length);
-
         setCardIndex((prev) => {
             const newIndex = (prev - 1 + arraysList.length) % arraysList.length;
-            if (newIndex === arraysList.length - 1 && progress > 0) {
-                setProgress((prevProgress) => prevProgress - 1);
-            }
             return newIndex;
         });
     };
-
-    const [progress, setProgress] = useState(0);
 
     return (
         <>
@@ -73,8 +64,8 @@ export default function ArraysPage() {
                         <Card data={arraysList[cardIndex]} isFlipped={isFlipped} setIsFlipped={setIsFlipped} rolledOut={rolledOut} />
                         <ArrowButton onClick={handleNextCard} direction="Right" />
                     </div>
-                    <div className="flex  justify-center">
-                        <ProgressBar value={progress} max={arraysList.length} />
+                    <div className="flex justify-center">
+                        <ProgressBar value={progress} max={arraysList.length - 1} />
                     </div>
                 </>
             ) : (
