@@ -22,10 +22,11 @@
         "baseUrl": "./src",
         "paths": {
             "@/app/*": ["app/*"],
-            "@/components/*": ["components/*"],
-            "@/assets/*": ["assets/*"],
-            "@/store/*": ["store/*"],
-            "@/styles/*": ["styles/*"]
+            "@/pages/*": ["pages/*"],
+            "@/widgets/*": ["widgets/*"],
+            "@/features/*": ["features/*"],
+            "@/entities/*": ["entities/*"],
+            "@/shared/*": ["shared/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

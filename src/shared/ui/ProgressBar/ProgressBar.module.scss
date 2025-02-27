@@ -1,0 +1,16 @@
+@use 'sass:math';
+@use '@/shared/styles/colors' as colors;
+
+.progress-bar {
+    width: 350px;
+    background-color: #{colors.$progressBarBackground};
+    border-radius: 1.5rem;
+    overflow: hidden;
+
+    .progress-fill {
+        height: 1.25rem;
+        background-color: #{colors.$progressBarFill};
+        transition: width 0.5s ease-in-out;
+        border-radius: 1.5rem;
+    }
+}
