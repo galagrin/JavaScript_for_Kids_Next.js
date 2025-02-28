@@ -1,0 +1,6 @@
+@use '@/shared/styles/colors' as colors;
+
+.active {
+    background-color: colors.$navLinkActive;
+    color: colors.$navLinkActiveText;
+}

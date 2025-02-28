@@ -7,11 +7,11 @@ export const useHomePage = () => {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
-    const { loadingAllArrays, fetchAllArraysList, errorAllArrays } = useArraysStore();
+    // const { loadingAllArrays, fetchAllArraysList, errorAllArrays } = useArraysStore();
 
     useEffect(() => {
         setMounted(true);
-        fetchAllArraysList();
+        // fetchAllArraysList();
     }, []);
 
     const toggleTheme = (newTheme: 'light' | 'dark') => {
@@ -21,8 +21,8 @@ export const useHomePage = () => {
     return {
         mounted,
         theme,
-        loadingAllArrays,
-        errorAllArrays,
+        // loadingAllArrays,
+        // errorAllArrays,
         toggleTheme,
     };
 };

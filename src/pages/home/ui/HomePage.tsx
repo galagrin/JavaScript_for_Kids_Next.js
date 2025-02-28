@@ -5,11 +5,10 @@ import { HexGallery } from 'widgets/HexGallery/ui/HexGallery';
 import { useHomePage } from '../model/useHomePage';
 
 export default function HomePage() {
-    const { mounted, theme, loadingAllArrays, errorAllArrays, toggleTheme } = useHomePage();
+    // const { mounted, theme, loadingAllArrays, errorAllArrays, toggleTheme } = useHomePage();
+    const { mounted, theme, toggleTheme } = useHomePage();
 
     if (!mounted) return null;
-    if (loadingAllArrays) return <div>Идет загрузка</div>;
-    if (errorAllArrays) return <div>Ошибка: {errorAllArrays}</div>;
 
     return (
         <>

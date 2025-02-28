@@ -34,9 +34,4 @@
     &:hover {
         color: colors.$navLinkHover;
     }
-
-    &.active {
-        background-color: colors.$navLinkActive;
-        color: colors.$navLinkActiveText;
-    }
 }
