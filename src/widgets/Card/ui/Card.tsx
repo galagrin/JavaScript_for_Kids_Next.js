@@ -1,12 +1,7 @@
-import styles from './Card.module.scss';
-import { ArrayMethod } from '@/entities/arrays/model/types';
+import { CardProps } from '../model/types';
 
-interface CardProps {
-    data: ArrayMethod;
-    isFlipped: boolean;
-    setIsFlipped: React.Dispatch<React.SetStateAction<boolean>>;
-    rolledOut: boolean;
-}
+import styles from './Card.module.scss';
+
 export const Card = ({ data, isFlipped, setIsFlipped, rolledOut }: CardProps) => {
     const handleClick = () => {
         setIsFlipped(!isFlipped);

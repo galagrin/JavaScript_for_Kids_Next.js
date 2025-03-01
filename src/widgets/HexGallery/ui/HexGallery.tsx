@@ -1,13 +1,9 @@
 import staticData from '../model/data.json';
+import { HexItem } from '../model/types';
 
 import styles from './HexGallery.module.scss';
 
-interface HexItem {
-    id: number;
-    title: string;
-    btnTitle: string;
-}
-export const HexGallery: React.FC = () => {
+export const HexGallery = () => {
     return (
         <section className={styles.hexagongallery}>
             {staticData.map((item: HexItem) => (
