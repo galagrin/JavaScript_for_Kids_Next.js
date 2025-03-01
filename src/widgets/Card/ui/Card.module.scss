@@ -33,18 +33,20 @@
     padding: 20px;
     box-sizing: border-box;
     color: white;
-    font-weight: bold;
-    font-size: 18px;
+
     gap: 20px;
+    font-family: var(--font-inter), sans-serif;
 }
 
 .card__face--front {
     background: colors.$cardFrontBackground;
+    font-size: 24px;
 }
 
 .card__face--back {
     background: colors.$cardBackBackground;
     transform: rotateY(180deg);
+    font-size: 18px;
 }
 
 @keyframes rollout {
