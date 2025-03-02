@@ -17,7 +17,8 @@
     position: relative;
     width: 240px;
     height: 265px;
-    background-color: colors.$hexDefault;
+    // background-color: colors.$hexDefault;
+    background-color: var(--hex-background-default);
     -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     transition:
@@ -27,7 +28,8 @@
 }
 
 .hex:hover {
-    background-color: colors.$hexHover;
+    // background-color: colors.$hexHover;
+    background-color: var(--hex-background-hover);
     transform: scale(1.05);
     box-shadow: 0 4px 20px colors.$hexHoverShadow;
 }
@@ -73,7 +75,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: colors.$hexContentColor;
+    // color: colors.$hexContentColor;
+    color: var(--hex-content-color);
     opacity: 0.2;
     transition: opacity 0.3s;
 }
@@ -84,17 +87,20 @@
 
 .hexbutton {
     margin-top: 10px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     cursor: pointer;
     border-radius: 5px;
+    border: none;
     transition: background-color 0.3s;
-    background-color: colors.$hexButtonBackground;
+    // background-color: colors.$hexButtonBackground;
+    background-color: var(--hex-button-background);
     color: white;
     @include textPrimary($size: 16px, $align: center);
 }
 
 .hexbutton:hover {
-    background-color: colors.$hexButtonHoverBackground;
+    // background-color: colors.$hexButtonHoverBackground;
+    background-color: var(--hex-button-hover-background);
 }
 
 .title {
