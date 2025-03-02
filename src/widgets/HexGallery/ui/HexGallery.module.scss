@@ -1,4 +1,4 @@
-@use '@/shared/styles/colors' as colors;
+@use '@/shared/styles/colors' as *;
 @use '@/shared/styles/mixins.scss' as *;
 
 .hexagongallery {
@@ -31,7 +31,7 @@
     // background-color: colors.$hexHover;
     background-color: var(--hex-background-hover);
     transform: scale(1.05);
-    box-shadow: 0 4px 20px colors.$hexHoverShadow;
+    box-shadow: 0 4px 20px $hexHoverShadow;
 }
 
 .hex:first-child {

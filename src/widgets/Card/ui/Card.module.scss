@@ -1,4 +1,4 @@
-@use '@/shared/styles/colors.scss' as colors;
+@use '@/shared/styles/colors' as *;
 @use '@/shared/styles/mixins.scss' as *;
 
 .scene {
@@ -38,13 +38,13 @@
 }
 
 .card__face--front {
-    background: colors.$cardFrontBackground;
+    background: $cardFrontBackground;
     font-size: 24px;
     @include textPrimary($size: 24px);
 }
 
 .card__face--back {
-    background: colors.$cardBackBackground;
+    background: $cardBackBackground;
     transform: rotateY(180deg);
     @include textPrimary();
 }

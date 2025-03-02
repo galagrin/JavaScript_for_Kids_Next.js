@@ -1,4 +1,4 @@
-@use '@/shared/styles/colors' as colors;
+@use '@/shared/styles/colors' as *;
 
 .navigation {
     display: flex;
@@ -8,8 +8,8 @@
     border-radius: 1.5rem;
     margin: 1rem 3rem;
     backdrop-filter: blur(20px);
-    background-color: colors.$navBackground;
-    background-image: linear-gradient(to bottom right, colors.$navBackgroundGradientFrom, colors.$navBackgroundGradientTo);
+    background-color: $navBackground;
+    background-image: linear-gradient(to bottom right, $navBackgroundGradientFrom, $navBackgroundGradientTo);
 }
 
 .navigationList {
@@ -29,10 +29,10 @@
     display: inline-flex;
     border-radius: 9999px;
     padding: 0.375rem 1.25rem;
-    color: colors.$navLinkText;
+    color: $navLinkText;
     text-decoration: none;
     &:hover {
-        color: colors.$navLinkHover;
+        color: $navLinkHover;
         font-weight: 500;
     }
 }

@@ -1,9 +1,9 @@
 @use '@/shared/styles/mixins.scss' as *;
-@use '@/shared/styles/colors' as colors;
+@use '@/shared/styles/colors' as *;
 
 .title {
     @include textPrimary($size: 18px, $align: center);
-    color: #{colors.$textDefaultColor};
+    color: $textDefaultColor;
 }
 
 .container {
