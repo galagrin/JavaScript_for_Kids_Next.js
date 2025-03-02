@@ -1,4 +1,5 @@
-@use '@/shared/styles/colors' as colors;
+@use '@/shared/styles/colors.scss' as colors;
+@use '@/shared/styles/mixins.scss' as *;
 
 .scene {
     width: 350px;
@@ -33,20 +34,19 @@
     padding: 20px;
     box-sizing: border-box;
     color: white;
-
     gap: 20px;
-    font-family: var(--font-inter), sans-serif;
 }
 
 .card__face--front {
     background: colors.$cardFrontBackground;
     font-size: 24px;
+    @include textPrimary($size: 24px);
 }
 
 .card__face--back {
     background: colors.$cardBackBackground;
     transform: rotateY(180deg);
-    font-size: 18px;
+    @include textPrimary();
 }
 
 @keyframes rollout {

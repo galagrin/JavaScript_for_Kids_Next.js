@@ -1,4 +1,5 @@
 @use '@/shared/styles/colors' as colors;
+@use '@/shared/styles/mixins.scss' as *;
 
 .hexagongallery {
     margin: 0 auto;
@@ -82,17 +83,14 @@
 }
 
 .hexbutton {
-    background-color: colors.$hexButtonBackground;
-    border-radius: 5px;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
     margin-top: 10px;
+    padding: 10px 20px;
     cursor: pointer;
+    border-radius: 5px;
     transition: background-color 0.3s;
+    background-color: colors.$hexButtonBackground;
+    color: white;
+    @include textPrimary($size: 16px, $align: center);
 }
 
 .hexbutton:hover {
@@ -100,6 +98,6 @@
 }
 
 .title {
-    font-size: 20px;
-    margin: 0;
+    // margin: 0;
+    @include textPrimary($size: 20px, $align: center);
 }
