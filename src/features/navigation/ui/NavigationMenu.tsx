@@ -5,7 +5,7 @@ import NavLink from '@/entities/navlink/ui/NavLink';
 
 export const NavigationMenu = () => {
     return (
-        <nav className={styles.navigation}>
+        <nav>
             <ul className={styles.navigationList}>
                 <li>
                     <NavLink href="/" exact className={styles.navigationLink}>

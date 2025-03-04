@@ -1,3 +1,8 @@
+// Header
+$headerBackground: rgb(254, 240, 138);
+$headerBackgroundGradientFrom: rgba(255, 255, 255, 0.8);
+$headerBackgroundGradientTo: rgba(255, 255, 255, 0.2);
+
 // Cards
 $cardFrontBackground: rgb(226, 179, 179);
 $cardBackBackground: rgb(178, 178, 220);
@@ -23,9 +28,7 @@ $arrowDefault: #6b7280;
 $arrowHover: #fde69c;
 
 // Navigation Menu
-$navBackground: rgb(254, 240, 138);
-$navBackgroundGradientFrom: rgba(255, 255, 255, 0.8);
-$navBackgroundGradientTo: rgba(255, 255, 255, 0.2);
+
 $navLinkText: rgb(100, 116, 139);
 $navLinkHover: rgb(99, 102, 241);
 $navLinkActive: rgb(226, 232, 240);

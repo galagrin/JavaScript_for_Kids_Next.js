@@ -1,17 +1,12 @@
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
-import { useArraysStore } from '@/entities/arrays/model/store';
-
-export const useHomePage = () => {
+export const useThemeChange = () => {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
-    // const { loadingAllArrays, fetchAllArraysList, errorAllArrays } = useArraysStore();
-
     useEffect(() => {
         setMounted(true);
-        // fetchAllArraysList();
     }, []);
 
     const toggleTheme = (newTheme: 'light' | 'dark') => {
@@ -21,8 +16,6 @@ export const useHomePage = () => {
     return {
         mounted,
         theme,
-        // loadingAllArrays,
-        // errorAllArrays,
         toggleTheme,
     };
 };

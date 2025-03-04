@@ -1,17 +1,4 @@
 @use '@/shared/styles/colors' as *;
-
-.navigation {
-    display: flex;
-    justify-content: center;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-radius: 1.5rem;
-    margin: 1rem 3rem;
-    backdrop-filter: blur(20px);
-    background-color: $navBackground;
-    background-image: linear-gradient(to bottom right, $navBackgroundGradientFrom, $navBackgroundGradientTo);
-}
-
 .navigationList {
     display: flex;
     flex-wrap: wrap;
