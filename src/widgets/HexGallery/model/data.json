@@ -1,0 +1,44 @@
+[
+    {
+        "id": 111,
+        "title": "Строки",
+        "btnTitle": "подробнее",
+        "link": "/arrays"
+    },
+    {
+        "id": 112,
+        "title": "Числа",
+        "btnTitle": "подробнее",
+        "link": "/arrays"
+    },
+    {
+        "id": 113,
+        "title": "Типы данных",
+        "btnTitle": "подробнее",
+        "link": "/arrays"
+    },
+    {
+        "id": 114,
+        "title": "Объекты",
+        "btnTitle": "подробнее",
+        "link": "/arrays"
+    },
+    {
+        "id": 115,
+        "title": "Массивы",
+        "btnTitle": "подробнее",
+        "link": "/arrays"
+    },
+    {
+        "id": 116,
+        "title": "Дата",
+        "btnTitle": "подробнее",
+        "link": "/arrays"
+    },
+    {
+        "id": 117,
+        "title": "Промисы",
+        "btnTitle": "подробнее",
+        "link": "/arrays"
+    }
+]

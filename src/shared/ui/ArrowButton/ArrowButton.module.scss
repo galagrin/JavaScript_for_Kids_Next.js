@@ -1,0 +1,15 @@
+@use '@/shared/styles/colors' as *;
+
+.arrowButton {
+    color: $arrowDefault;
+    transition: transform 0.2s;
+
+    &:hover {
+        color: $arrowHover;
+        transform: scale(1.1);
+    }
+
+    &:active {
+        transform: scale(0.9);
+    }
+}

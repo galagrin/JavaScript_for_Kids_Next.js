@@ -1,0 +1,19 @@
+@use '@/shared/styles/mixins.scss' as *;
+@use '@/shared/styles/colors' as *;
+
+.title {
+    @include textPrimary($size: 18px, $align: center);
+    color: $textDefaultColor;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    justify-content: center;
+}
+
+.progressWrapper {
+    display: flex;
+    justify-content: center;
+}

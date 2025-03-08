@@ -1,0 +1,40 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+@use '@/shared/styles/colors' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background: #f9f9fb;
+    --foreground: #171717;
+    /* светлая тема */
+    --hex-background-default: #{$hexDefault};
+    --hex-background-hover: #{$hexHover};
+    --hex-content-color: #{$hexContentColor};
+    --hex-button-background: #{$hexButtonBackground};
+    --hex-button-hover-background: #{$hexButtonHoverBackground};
+}
+
+[data-theme='dark'] {
+    --background: #171717;
+    --foreground: #f9f9fb;
+
+    --hex-background-default: #fef4a9;
+    --hex-background-hover: #aaa;
+    --hex-hover-shadow: rgba(255, 255, 255, 0.5);
+    --hex-button-background: #9194a7;
+    --hex-button-hover-background: #fde186b4;
+    --hex-content-color: #555;
+}
+
+body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: var(--font-inter), sans-serif;
+}
