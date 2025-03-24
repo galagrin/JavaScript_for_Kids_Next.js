@@ -1,8 +1,8 @@
-import { CardProps } from '../model/types';
+import { CardData, CardProps } from '../model/types';
 
 import styles from './Card.module.scss';
 
-export const Card = ({ data, isFlipped, setIsFlipped, rolledOut }: CardProps) => {
+export const Card = ({ data, isFlipped, setIsFlipped, rolledOut }: CardProps<CardData>) => {
     const handleSpeak = () => {
         const speech = new SpeechSynthesisUtterance(data.childExplanation);
         speech.lang = 'ru-RU'; // Устанавливаем язык на русский
@@ -13,10 +13,10 @@ export const Card = ({ data, isFlipped, setIsFlipped, rolledOut }: CardProps) =>
     };
 
     return (
-        <div className={`${styles.scene} ${rolledOut ? styles['roll-out'] : ''}`}>
-            <div className={`${styles.card} ${isFlipped ? styles['is-flipped'] : ''}`} onClick={handleClick}>
-                <div className={`${styles['card__face']} ${styles['card__face--front']}`}>{data.name} ()</div>
-                <div className={`${styles['card__face']} ${styles['card__face--back']}`}>
+        <div className={`${styles.scene} ${rolledOut ? styles.rollOut : ''}`}>
+            <div className={`${styles.card} ${isFlipped ? styles.isFlipped : ''}`} onClick={handleClick}>
+                <div className={`${styles.cardFace} ${styles.cardFaceFront}`}>{data.name} ()</div>
+                <div className={`${styles.cardFace} ${styles.cardFaceBack}`}>
                     <div>{data.childExplanation}</div>
                     <div>{data.childExample}</div>
                 </div>

@@ -1,7 +1,7 @@
 import ArraysPage from '@/pages/arrays/ui/ArraysPage';
 
 export const metadata = {
-    title: 'Массивы',
+    title: 'Массивы в JS',
     description: 'Страница изучения методов массивов',
 };
 export default function Page() {

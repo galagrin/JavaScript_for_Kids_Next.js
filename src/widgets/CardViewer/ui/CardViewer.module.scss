@@ -1,0 +1,14 @@
+@use '@/shared/styles/mixins.scss' as *;
+@use '@/shared/styles/colors' as *;
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    justify-content: center;
+}
+
+.progressWrapper {
+    display: flex;
+    justify-content: center;
+}

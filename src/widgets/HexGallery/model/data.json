@@ -3,7 +3,7 @@
         "id": 111,
         "title": "Строки",
         "btnTitle": "подробнее",
-        "link": "/arrays"
+        "link": "/strings"
     },
     {
         "id": 112,
@@ -21,7 +21,7 @@
         "id": 114,
         "title": "Объекты",
         "btnTitle": "подробнее",
-        "link": "/arrays"
+        "link": "/objects"
     },
     {
         "id": 115,

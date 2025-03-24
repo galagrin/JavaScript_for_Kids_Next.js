@@ -1,45 +1,18 @@
 'use client';
 
-import styles from './ArraysPage.module.scss';
-import { useArrayPage } from '@/pages/arrays/model/useArrayPage';
-import { ArrowButton } from '@/shared/ui/ArrowButton/ArrowButton';
-import { ProgressBar } from '@/shared/ui/ProgressBar/ProgressBar';
-import { Card } from '@/widgets/Card/index';
+import { useEffect } from 'react';
+
+import { useArraysStore } from '@/entities/arrays/model/store';
+import { CardViewer } from '@/widgets/CardViewer/ui/CardViewer';
 
 export default function ArraysPage() {
-    const {
-        loadingAllArrays,
-        errorAllArrays,
-        isFlipped,
-        setIsFlipped,
-        rolledOut,
-        progress,
-        handleNextCard,
-        handlePrevCard,
-        getCurrentCard,
-        arraysList,
-    } = useArrayPage();
+    const { arraysList, fetchAllArraysList, loadingAllArrays, errorAllArrays } = useArraysStore();
 
-    if (loadingAllArrays) return <div>Загрузка данных...</div>;
-    if (errorAllArrays) return <div>Ошибка: {errorAllArrays}</div>;
+    useEffect(() => {
+        if (arraysList.length === 0) {
+            fetchAllArraysList();
+        }
+    }, [arraysList, fetchAllArraysList]);
 
-    const currentCard = getCurrentCard();
-
-    return (
-        <>
-            <h1 className={styles.title}>Изучаем методы массивов</h1>
-            {currentCard && (
-                <>
-                    <div className={styles.container}>
-                        <ArrowButton onClick={handlePrevCard} direction="Left" />
-                        <Card data={currentCard} isFlipped={isFlipped} setIsFlipped={setIsFlipped} rolledOut={rolledOut} />
-                        <ArrowButton onClick={handleNextCard} direction="Right" />
-                    </div>
-                    <div className={styles.progressWrapper}>
-                        <ProgressBar value={progress} max={arraysList.length > 0 ? arraysList.length - 1 : 0} />
-                    </div>
-                </>
-            )}
-        </>
-    );
+    return <CardViewer items={arraysList} isLoading={loadingAllArrays} error={errorAllArrays} />;
 }
