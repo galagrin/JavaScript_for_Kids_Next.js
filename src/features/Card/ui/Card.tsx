@@ -3,11 +3,7 @@ import { CardData, CardProps } from '../model/types';
 import styles from './Card.module.scss';
 
 export const Card = ({ data, isFlipped, setIsFlipped, rolledOut }: CardProps<CardData>) => {
-    const handleSpeak = () => {
-        const speech = new SpeechSynthesisUtterance(data.childExplanation);
-        speech.lang = 'ru-RU'; // Устанавливаем язык на русский
-        window.speechSynthesis.speak(speech); // Произносим текст
-    };
+
     const handleClick = () => {
         setIsFlipped(!isFlipped);
     };
@@ -21,7 +17,6 @@ export const Card = ({ data, isFlipped, setIsFlipped, rolledOut }: CardProps<Car
                     <div>{data.childExample}</div>
                 </div>
             </div>
-            <button onClick={handleSpeak}>Озвучить</button>
         </div>
     );
 };

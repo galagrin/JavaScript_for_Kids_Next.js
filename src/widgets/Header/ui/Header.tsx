@@ -11,12 +11,10 @@ import styles from './Header.module.scss';
 export const Header = () => {
     const { mounted, toggleTheme } = useThemeChange();
 
-    if (!mounted) return null;
-
     return (
         <header className={styles.header}>
             <NavigationMenu />
-            <ThemeSwitch toggleTheme={toggleTheme} />
+            {mounted && <ThemeSwitch toggleTheme={toggleTheme} />}
         </header>
     );
 };

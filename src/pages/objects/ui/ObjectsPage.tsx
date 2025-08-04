@@ -2,19 +2,20 @@
 
 import { useEffect } from 'react';
 
-import { useArraysStore } from '@/entities/arrays/model/store';
+import { useObjectsStore } from '@/entities/objects';
 
 import { CardViewer } from '@/widgets/CardViewer/ui/CardViewer';
 
 import styles from './ObjectsPage.module.scss';
 
 export const ObjectsPage = () => {
-    const { arraysList, fetchAllArraysList, loadingAllArrays, errorAllArrays } = useArraysStore();
+    const { objectsList, fetchAllObjectsList, loadingAllObjects, errorAllObjects } = useObjectsStore();
+    
     useEffect(() => {
-        if (arraysList.length === 0) {
-            fetchAllArraysList();
+        if (objectsList.length === 0) {
+            fetchAllObjectsList();
         }
-    }, [arraysList, fetchAllArraysList]);
+    }, [objectsList, fetchAllObjectsList]);
 
-    return <CardViewer items={arraysList} isLoading={loadingAllArrays} error={errorAllArrays} />;
+    return <CardViewer items={objectsList} isLoading={loadingAllObjects} error={errorAllObjects} />;
 };

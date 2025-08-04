@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { fetchApi } from '@/shared/api/apiBase';
+import { fetchArrays } from '@/shared/api/apiBase';
 
 import { ArraysActions, ArraysState } from './types';
 
@@ -17,7 +17,7 @@ export const useArraysStore = create<ArrayStore>()(
             fetchAllArraysList: async () => {
                 set({ loadingAllArrays: true, errorAllArrays: null });
                 try {
-                    const response = await fetchApi('all-arrays');
+                    const response = await fetchArrays();
                     set({
                         arraysList: response,
                         loadingAllArrays: false,

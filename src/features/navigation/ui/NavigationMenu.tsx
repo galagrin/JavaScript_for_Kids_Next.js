@@ -10,12 +10,22 @@ export const NavigationMenu = () => {
             <ul className={styles.navigationList}>
                 <li>
                     <NavLink href="/" exact className={styles.navigationLink}>
-                        Домой
+                         Домой
                     </NavLink>
                 </li>
                 <li>
                     <NavLink href="/arrays" className={styles.navigationLink}>
-                        Массивы
+                         Массивы
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink href="/strings" className={styles.navigationLink}>
+                         Строки
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink href="/objects" className={styles.navigationLink}>
+                         Объекты
                     </NavLink>
                 </li>
             </ul>
