@@ -1,48 +1,40 @@
 import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 
-import { ArrayMethod, ArraysActions, ArraysState } from './types';
-import { fetchAllArrays } from '@/entities/arrays/api';
+import { fetchApi } from '@/shared/api/apiBase';
+
+import { ArraysActions, ArraysState } from './types';
 
 type ArrayStore = ArraysState & ArraysActions;
 
 export const useArraysStore = create<ArrayStore>()(
-    devtools(
-        persist(
-            (set) => ({
-                arraysList: [],
-                loadingAllArrays: false,
-                errorAllArrays: null,
+    persist(
+        (set) => ({
+            arraysList: [],
+            loadingAllArrays: false,
+            errorAllArrays: null,
 
-                fetchAllArraysList: async () => {
-                    set({ loadingAllArrays: true, errorAllArrays: null });
-                    try {
-                        const response = await fetchAllArrays();
-                        set({
-                            arraysList: response,
-                            loadingAllArrays: false,
-                        });
-                    } catch (error) {
-                        set({
-                            errorAllArrays: error instanceof Error ? error.message : 'Произошла ошибка при загрузке',
-                            loadingAllArrays: false,
-                        });
-                    }
-                },
-
-                reset: () =>
+            fetchAllArraysList: async () => {
+                set({ loadingAllArrays: true, errorAllArrays: null });
+                try {
+                    const response = await fetchApi('all-arrays');
                     set({
-                        arraysList: [],
+                        arraysList: response,
                         loadingAllArrays: false,
-                        errorAllArrays: null,
-                    }),
+                    });
+                } catch (error) {
+                    set({
+                        errorAllArrays: error instanceof Error ? error.message : 'Произошла ошибка при загрузке',
+                        loadingAllArrays: false,
+                    });
+                }
+            },
+        }),
+        {
+            name: 'arrays-storage',
+            partialize: (state) => ({
+                arraysList: state.arraysList,
             }),
-            {
-                name: 'arrays-storage',
-                partialize: (state) => ({
-                    arraysList: state.arraysList,
-                }),
-            }
-        )
+        }
     )
 );

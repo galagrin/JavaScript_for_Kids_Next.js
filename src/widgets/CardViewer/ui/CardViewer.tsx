@@ -1,12 +1,14 @@
 'use client';
 
+import { ArrowButton } from '@/shared/ui/ArrowButton/ArrowButton';
+import { ProgressBar } from '@/shared/ui/ProgressBar/ProgressBar';
+
+import { Card } from '@/features/Card/index';
+import { CardData } from '@/features/Card/model/types';
+
 import { useCardViewer } from '../model/useCardViewer';
 
 import styles from './CardViewer.module.scss';
-import { Card } from '@/features/Card/index';
-import { CardData } from '@/features/Card/model/types';
-import { ArrowButton } from '@/shared/ui/ArrowButton/ArrowButton';
-import { ProgressBar } from '@/shared/ui/ProgressBar/ProgressBar';
 
 interface CardsViewerProps<T extends CardData> {
     items: T[];

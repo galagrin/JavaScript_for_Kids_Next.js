@@ -8,16 +8,17 @@
     "singleQuote": true,
     "importOrder": [
         "<THIRD_PARTY_MODULES>",
-        "^@/components/(.*)$",
-        "^@/assets/(.*)$",
-        "^@/store/(.*)$",
-        "^@/sservices/(.*)$",
-        "^@/types/(.*)$",
+        "^@/shared/(.*)$",
+        "^@/entities/(.*)$",
+        "^@/features/(.*)$",
+        "^@/widgets/(.*)$",
         "^@/app/(.*)$",
+        "^@/pages/(.*)$",
         "^../(.*)",
         "^./(.*)",
         "(.scss)$"
     ],
+
     "importOrderSeparation": true,
     "importOrderSortSpecifiers": true
 }

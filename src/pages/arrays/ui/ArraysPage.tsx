@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 
 import { useArraysStore } from '@/entities/arrays/model/store';
+
 import { CardViewer } from '@/widgets/CardViewer/ui/CardViewer';
 
 export default function ArraysPage() {

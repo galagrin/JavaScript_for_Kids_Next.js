@@ -16,5 +16,4 @@ export interface ArraysState {
 
 export interface ArraysActions {
     fetchAllArraysList: () => Promise<void>;
-    reset: () => void;
 }

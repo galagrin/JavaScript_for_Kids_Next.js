@@ -1,7 +1,8 @@
 'use client';
 
-import styles from './NavigationMenu.module.scss';
 import NavLink from '@/entities/navlink/ui/NavLink';
+
+import styles from './NavigationMenu.module.scss';
 
 export const NavigationMenu = () => {
     return (
