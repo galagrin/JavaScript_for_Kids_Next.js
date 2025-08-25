@@ -17,5 +17,5 @@ export const StringsPage = () => {
         }
     }, [stringsList, fetchAllStringsList]);
 
-    return <CardViewer items={stringsList} isLoading={loadingAllStrings} error={errorAllStrings} />;
+    return <CardViewer items={stringsList.map(item => ({ ...item, id: String(item.id) }))} isLoading={loadingAllStrings} error={errorAllStrings} progressKey="strings" />;
 };

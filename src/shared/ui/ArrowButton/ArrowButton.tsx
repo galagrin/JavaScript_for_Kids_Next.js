@@ -8,6 +8,7 @@ interface ArrowButtonProps {
     onClick: () => void;
     direction: 'Left' | 'Right';
 }
+
 export const ArrowButton = ({ onClick, direction }: ArrowButtonProps) => {
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -19,9 +20,10 @@ export const ArrowButton = ({ onClick, direction }: ArrowButtonProps) => {
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
         };
-    }, [onClick]);
+    }, [onClick, direction]);
 
     const Icon = direction === 'Left' ? CgArrowLeftO : CgArrowRightO;
+    
     return (
         <IconContext.Provider value={{ size: '2em' }}>
             <div>

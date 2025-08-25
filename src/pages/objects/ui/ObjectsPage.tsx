@@ -17,5 +17,5 @@ export const ObjectsPage = () => {
         }
     }, [objectsList, fetchAllObjectsList]);
 
-    return <CardViewer items={objectsList} isLoading={loadingAllObjects} error={errorAllObjects} />;
+    return <CardViewer items={objectsList.map(item => ({ ...item, id: String(item.id) }))} isLoading={loadingAllObjects} error={errorAllObjects} progressKey="objects" />;
 };

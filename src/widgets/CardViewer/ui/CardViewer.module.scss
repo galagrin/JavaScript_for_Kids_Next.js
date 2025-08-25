@@ -12,3 +12,139 @@
     display: flex;
     justify-content: center;
 }
+
+.skeletonCard {
+    width: 350px;
+    height: 450px;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.2s infinite linear;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin: 20px 0;
+}
+
+.skeletonTitle {
+    width: 60%;
+    height: 32px;
+    border-radius: 8px;
+    background: #cccccc;
+    opacity: 0.7;
+}
+
+.skeletonText {
+    width: 80%;
+    height: 20px;
+    border-radius: 6px;
+    background: #dddddd;
+    opacity: 0.6;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.progressMapWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.progressMap {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.progressDot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: $progressBarBackground;
+    border: 2px solid $progressBarFill;
+    transition: background 0.3s, border 0.3s;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.progressDotViewed {
+    background: $cardFrontBackground;
+    border-color: $cardBackBackground;
+}
+
+.progressDotCurrent {
+    border-color: $cardBackBackground;
+    box-shadow: 0 0 0 3px $cardBackBackground + '33';
+}
+
+.resetBtn {
+    background: $hexButtonBackground;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: $textDefaultColor;
+    transition: all 0.3s ease;
+    margin-bottom: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.resetBtn:hover {
+    background: $hexButtonHoverBackground;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.resetBtn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progressInfo {
+    font-size: 0.95rem;
+    color: #888;
+}
+
+[data-theme='dark'] .progressDot {
+    background: #222;
+    border-color: $progressBarFill;
+}
+
+[data-theme='dark'] .progressDotViewed {
+    background: $cardBackBackground;
+    border-color: $cardFrontBackground;
+}
+
+[data-theme='dark'] .progressDotCurrent {
+    border-color: $cardFrontBackground;
+    box-shadow: 0 0 0 3px $cardFrontBackground + '33';
+}
+
+[data-theme='dark'] .resetBtn {
+    color: #eee;
+    border-color: #555;
+    background: #222;
+}
+
+[data-theme='dark'] .resetBtn:hover {
+    background: #333;
+    color: #90caf9;
+}
+
+[data-theme='dark'] .progressInfo {
+    color: #bbb;
+}

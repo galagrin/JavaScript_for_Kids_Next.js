@@ -61,3 +61,13 @@
 .rollOut {
     animation: rollout 0.7s ease-out;
 }
+.codeBlock {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    padding: 1em;
+    border-radius: 4px;
+
+    font-family: 'Source Code Pro', monospace, monospace;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+}

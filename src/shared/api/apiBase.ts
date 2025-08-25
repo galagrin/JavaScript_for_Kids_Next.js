@@ -49,3 +49,19 @@ export const fetchStrings = async (): Promise<ApiMethod[]> => {
 export const fetchObjects = async (): Promise<ApiMethod[]> => {
     return fetchApi('objects');
 };
+
+export const fetchDates = async (): Promise<ApiMethod[]> => {
+    return fetchApi('date');
+};
+
+export const fetchPromises = async (): Promise<ApiMethod[]> => {
+    return fetchApi('promise');
+};
+
+export const fetchNumbers = async (): Promise<ApiMethod[]> => {
+    return fetchApi('number');
+};
+
+export const fetchDataTypes = async (): Promise<ApiMethod[]> => {
+    return fetchApi('datatypes');
+};

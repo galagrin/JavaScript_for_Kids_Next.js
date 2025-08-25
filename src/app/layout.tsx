@@ -31,7 +31,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning>
+        <html lang="ru" suppressHydrationWarning>
             <body className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}>
                 <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
                     <Header />

@@ -15,5 +15,5 @@ export default function ArraysPage() {
         }
     }, [arraysList, fetchAllArraysList]);
 
-    return <CardViewer items={arraysList} isLoading={loadingAllArrays} error={errorAllArrays} />;
+    return <CardViewer items={arraysList.map(item => ({ ...item, id: String(item.id) }))} isLoading={loadingAllArrays} error={errorAllArrays} progressKey="arrays" />;
 }
