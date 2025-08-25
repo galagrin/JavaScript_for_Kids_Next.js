@@ -9,13 +9,13 @@
         "id": 112,
         "title": "Числа",
         "btnTitle": "подробнее",
-        "link": "/arrays"
+        "link": "/numbers"
     },
     {
         "id": 113,
         "title": "Типы данных",
         "btnTitle": "подробнее",
-        "link": "/arrays"
+        "link": "/datatypes"
     },
     {
         "id": 114,
@@ -33,12 +33,12 @@
         "id": 116,
         "title": "Дата",
         "btnTitle": "подробнее",
-        "link": "/arrays"
+        "link": "/dates"
     },
     {
         "id": 117,
         "title": "Промисы",
         "btnTitle": "подробнее",
-        "link": "/arrays"
+        "link": "/promises"
     }
 ]
