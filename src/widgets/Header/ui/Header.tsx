@@ -13,8 +13,10 @@ export const Header = () => {
 
     return (
         <header className={styles.header}>
-            <NavigationMenu />
-            {mounted && <ThemeSwitch toggleTheme={toggleTheme} />}
+            <div className={styles.headerContainer}>
+                <NavigationMenu />
+                {mounted && <ThemeSwitch toggleTheme={toggleTheme} />}
+            </div>
         </header>
     );
 };

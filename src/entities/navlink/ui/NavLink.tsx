@@ -10,12 +10,14 @@ export default function NavLink({
     exact = false,
     children,
     className,
+    onClick,
     ...props
 }: {
     href: string;
     exact?: boolean;
     className?: string;
     children: React.ReactNode;
+    onClick?: () => void;
 }) {
     const pathname = usePathname();
 
@@ -24,7 +26,7 @@ export default function NavLink({
     const newClassName = isActive ? `${className} ${styles.active}` : className;
 
     return (
-        <Link href={href} className={newClassName} {...props}>
+        <Link href={href} className={newClassName} onClick={onClick} {...props}>
             {children}
         </Link>
     );

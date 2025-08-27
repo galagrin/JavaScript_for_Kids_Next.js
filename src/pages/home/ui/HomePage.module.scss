@@ -5,6 +5,10 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    padding: 1rem;
+    @media (max-width: 1478px) {
+        flex-direction: column;
+    }
 }
 
 .pandaImage {
@@ -23,8 +27,8 @@
 .pandaBlock {
     display: flex;
     align-items: center;
-    margin-right: 18px;
-    height: 300px;
+
+    max-height: 300px;
 }
 
 .speechBubble {
@@ -79,22 +83,6 @@
         margin-right: 0;
         margin-bottom: 24px;
         height: auto;
-    }
-    .speechBubble {
-        margin-left: 0;
-        margin-top: 18px;
-        max-width: 95vw;
-        height: auto;
-    }
-    .speechBubble::after {
-        left: 40px;
-        top: -24px;
-        border-top: none;
-        border-bottom: 24px solid #fffbe7;
-        border-right: 16px solid transparent;
-        border-left: 16px solid transparent;
-        border-bottom: 24px solid #fffbe7;
-        border-right: none;
     }
 }
 [data-theme='dark'] .speechBubble {

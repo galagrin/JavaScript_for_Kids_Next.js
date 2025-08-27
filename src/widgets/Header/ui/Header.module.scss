@@ -6,12 +6,24 @@
     z-index: 1;
     display: flex;
     justify-content: center;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding: 1.5rem;
+
     border-radius: 1.5rem;
     margin: 1rem 3rem;
     gap: 2rem;
     backdrop-filter: blur(20px);
     background-color: $headerBackground;
     background-image: linear-gradient(to bottom right, $headerBackgroundGradientFrom, $headerBackgroundGradientTo);
+}
+
+.headerContainer {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        justify-content: space-between;
+        gap: 0;
+    }
 }
