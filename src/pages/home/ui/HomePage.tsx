@@ -29,7 +29,7 @@ export default function HomePage() {
                 <div className={`${styles.speechBubble} ${showBubble ? styles.visible : ''}`}>
                     Привет! Я Панда. Здесь ты можешь выбрать раздел перейти на страницу, чтобы учить JavaScript.
                     <br />
-                    Просто нажми на любую цветную плитку справа!
+                    Просто нажми на любую цветную плитку!
                 </div>
                 <Image
                     src="/images/mainPandaImg.png"
