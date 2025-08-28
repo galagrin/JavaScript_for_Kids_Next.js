@@ -135,14 +135,14 @@
 }
 
 [data-theme='dark'] .resetBtn {
-    color: #eee;
-    border-color: #555;
-    background: #222;
+    color: $darkThemeResetButtonText;
+    border-color: $darkThemeResetButtonBorder;
+    background: $darkThemeResetButtonBackground;
 }
 
 [data-theme='dark'] .resetBtn:hover {
-    background: #333;
-    color: #90caf9;
+    background: $darkThemeResetButtonHoverBackground;
+    color: $darkThemeResetButtonText;
 }
 
 [data-theme='dark'] .progressInfo {

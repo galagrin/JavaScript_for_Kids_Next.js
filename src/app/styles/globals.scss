@@ -22,15 +22,15 @@
 }
 
 [data-theme='dark'] {
-    --background: #171717;
-    --foreground: #f9f9fb;
+    --background: #{$darkThemeBackground};
+    --foreground: #{$darkThemeForeground};
 
-    --hex-background-default: #fef4a9;
-    --hex-background-hover: #aaa;
+    --hex-background-default: #{$darkThemeHexBackground};
+    --hex-background-hover: #{$darkThemeHexHover};
     --hex-hover-shadow: rgba(255, 255, 255, 0.5);
-    --hex-button-background: #9194a7;
-    --hex-button-hover-background: #fde186b4;
-    --hex-content-color: #555;
+    --hex-button-background: #{$darkThemeHexButtonBackground};
+    --hex-button-hover-background: #{$darkThemeHexButtonHoverBackground};
+    --hex-content-color: #{$darkThemeHexContentColor};
 }
 
 body {

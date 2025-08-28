@@ -9,18 +9,31 @@ type ArrayStore = ArraysState & ArraysActions;
 
 export const useArraysStore = create<ArrayStore>()(
     persist(
-        (set) => ({
+        (set, get) => ({
             arraysList: [],
             loadingAllArrays: false,
             errorAllArrays: null,
+            lastFetchTime: 0,
+            cacheExpiry: 5 * 60 * 1000, // 5 минут
 
-            fetchAllArraysList: async () => {
+            fetchAllArraysList: async (force = false) => {
+                const state = get();
+                const now = Date.now();
+                
+                // Проверяем кэш и время последнего запроса
+                if (!force && 
+                    state.arraysList.length > 0 && 
+                    (now - state.lastFetchTime) < state.cacheExpiry) {
+                    return; // Используем кэшированные данные
+                }
+
                 set({ loadingAllArrays: true, errorAllArrays: null });
                 try {
                     const response = await fetchArrays();
                     set({
                         arraysList: response,
                         loadingAllArrays: false,
+                        lastFetchTime: now,
                     });
                 } catch (error) {
                     set({
@@ -34,6 +47,7 @@ export const useArraysStore = create<ArrayStore>()(
             name: 'arrays-storage',
             partialize: (state) => ({
                 arraysList: state.arraysList,
+                lastFetchTime: state.lastFetchTime,
             }),
         }
     )

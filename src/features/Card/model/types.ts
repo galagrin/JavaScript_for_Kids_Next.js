@@ -3,6 +3,9 @@ export interface CardData {
     name: string;
     childExplanation: string;
     childExample: string;
+    description: string;
+    syntax: string;
+    adultExample: string;
 }
 
 export interface CardProps<T = CardData> {

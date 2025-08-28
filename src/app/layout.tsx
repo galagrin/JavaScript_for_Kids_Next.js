@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 import { Geist, Geist_Mono, Inter } from 'next/font/google';
 import { Header } from 'widgets/Header/ui/Header';
+import { DataPreloader } from '@/shared/ui/DataPreloader/DataPreloader';
 
 import './styles/globals.scss';
 
@@ -34,6 +35,7 @@ export default function RootLayout({
         <html lang="ru" suppressHydrationWarning>
             <body className={`${geistSans.variable} ${geistMono.variable} ${inter.variable}`}>
                 <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
+                    <DataPreloader />
                     <Header />
                     {children}
                 </ThemeProvider>

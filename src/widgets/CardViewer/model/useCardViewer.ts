@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { CardData } from '@/features/Card/model/types';
 
@@ -9,52 +9,86 @@ export const useCardViewer = <T extends CardData>(items: T[], progressKey: strin
     const [progress, setProgress] = useState(0);
     const [viewedIds, setViewedIds] = useState<Set<string | number>>(new Set());
 
-    // Загрузка прогресса из localStorage
+    const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+    const rolloutTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined); // NEW
+
     useEffect(() => {
-        const saved = localStorage.getItem(`progress-${progressKey}`);
-        if (saved) {
-            try {
-                const arr = JSON.parse(saved);
-                setViewedIds(new Set(arr));
-            } catch {}
+        try {
+            const saved = localStorage.getItem(`progress-${progressKey}`);
+            if (saved) setViewedIds(new Set(JSON.parse(saved)));
+        } catch (error) {
+            console.warn('Failed to load progress from localStorage:', error);
         }
     }, [progressKey]);
 
-    // Сохранение прогресса
-    useEffect(() => {
-        localStorage.setItem(`progress-${progressKey}`, JSON.stringify(Array.from(viewedIds)));
-    }, [viewedIds, progressKey]);
+    const saveProgress = useCallback(
+        (newViewedIds: Set<string | number>) => {
+            if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+
+            saveTimeoutRef.current = setTimeout(() => {
+                try {
+                    localStorage.setItem(`progress-${progressKey}`, JSON.stringify(Array.from(newViewedIds)));
+                } catch (error) {
+                    console.warn('Failed to save progress to localStorage:', error);
+                }
+            }, 300);
+        },
+        [progressKey]
+    );
 
     useEffect(() => {
         setProgress(cardIndex);
-        if (items[cardIndex]) {
-            setViewedIds((prev) => new Set(prev).add(items[cardIndex].id));
-        }
-    }, [cardIndex, items]);
 
-    const handleNextCard = () => {
-        resetCardState();
-        setCardIndex((prev) => (prev + 1) % items.length);
-    };
+        const current = items[cardIndex];
+        if (!current) return;
 
-    const handlePrevCard = () => {
-        resetCardState();
-        setCardIndex((prev) => (prev - 1 + items.length) % items.length);
-    };
+        setViewedIds((prev) => {
+            if (prev.has(current.id)) return prev;
+            const newSet = new Set(prev);
+            newSet.add(current.id);
+            saveProgress(newSet);
+            return newSet;
+        });
+    }, [cardIndex, items, saveProgress]);
 
-    const resetCardState = () => {
+    useEffect(() => {
+        return () => {
+            if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+            if (rolloutTimeoutRef.current) clearTimeout(rolloutTimeoutRef.current);
+        };
+    }, []);
+
+    const resetCardState = useCallback(() => {
         setIsFlipped(false);
         setRolledOut(true);
-        setTimeout(() => setRolledOut(false), 700);
-    };
+        if (rolloutTimeoutRef.current) clearTimeout(rolloutTimeoutRef.current);
+        rolloutTimeoutRef.current = setTimeout(() => setRolledOut(false), 700);
+    }, []);
 
-    const getCurrentCard = (): T | null => (items.length > 0 ? items[cardIndex] : null);
+    const handleNextCard = useCallback(() => {
+        if (items.length === 0) return;
+        resetCardState();
+        setCardIndex((prev) => (prev + 1) % items.length);
+    }, [items.length, resetCardState]);
 
-    // Сброс прогресса
-    const resetProgress = () => {
+    const handlePrevCard = useCallback(() => {
+        if (items.length === 0) return;
+        resetCardState();
+        setCardIndex((prev) => (prev - 1 + items.length) % items.length);
+    }, [items.length, resetCardState]);
+
+    const getCurrentCard = useCallback((): T | null => {
+        return items.length > 0 ? items[cardIndex] : null;
+    }, [items, cardIndex]);
+
+    const resetProgress = useCallback(() => {
         setViewedIds(new Set());
-        localStorage.removeItem(`progress-${progressKey}`);
-    };
+        try {
+            localStorage.removeItem(`progress-${progressKey}`);
+        } catch (error) {
+            console.warn('Failed to remove progress from localStorage:', error);
+        }
+    }, [progressKey]);
 
     return {
         cardIndex,
