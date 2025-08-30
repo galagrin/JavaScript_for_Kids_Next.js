@@ -2,8 +2,9 @@
 
 import { ArrowButton } from '@/shared/ui/ArrowButton/ArrowButton';
 
-import { Card } from '@/features/Card/index';
+import { Card, AdultDetails } from '@/features/Card/index';
 import { CardData } from '@/features/Card/model/types';
+import { AdultExplanationToggle } from '@/shared/ui/AdultExplanationToggle';
 
 import { useCardViewer } from '../model/useCardViewer';
 
@@ -81,6 +82,10 @@ export const CardViewer = <T extends CardData>({ items, isLoading = false, error
                         <Card data={currentCard} isFlipped={isFlipped} setIsFlipped={setIsFlipped} rolledOut={rolledOut} />
                         <ArrowButton onClick={handleNextCard} direction="Right" />
                     </div>
+                    
+                    <AdultExplanationToggle storageKey={`${progressKey}-adult-open-${currentCard.id}`}>
+                        <AdultDetails data={currentCard} />
+                    </AdultExplanationToggle>
                 </>
             )}
         </>

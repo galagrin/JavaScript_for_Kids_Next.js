@@ -96,6 +96,11 @@ export const NavigationMenu = () => {
                         Типы данных
                     </NavLink>
                 </li>
+                <li>
+                    <NavLink href="/quiz" className={styles.navigationLink} onClick={closeMenu}>
+                        Викторина
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     );

@@ -1,0 +1,99 @@
+@use '@/shared/styles/colors' as *;
+@use '@/shared/styles/mixins.scss' as *;
+
+.adultPanel {
+  margin: 1rem 3rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.adultTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid $hexButtonBackground;
+}
+
+.adultBlock {
+  margin-bottom: 1.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.adultLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.adultText {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #374151;
+  margin: 0;
+}
+
+.adultCode {
+  background: #f8f9fa;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+
+  code {
+    color: #1f2937;
+    background: none;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+// Dark theme styles
+[data-theme='dark'] .adultPanel {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] .adultTitle {
+  color: #f3f4f6;
+  border-bottom-color: $darkThemeHexButtonBackground;
+}
+
+[data-theme='dark'] .adultLabel {
+  color: #9ca3af;
+}
+
+[data-theme='dark'] .adultText {
+  color: #d1d5db;
+}
+
+[data-theme='dark'] .adultCode {
+  background: #1f2937;
+  border-color: #374151;
+
+  code {
+    color: #f3f4f6;
+  }
+} 

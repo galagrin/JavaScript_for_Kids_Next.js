@@ -14,3 +14,8 @@ export interface CardProps<T = CardData> {
     setIsFlipped: React.Dispatch<React.SetStateAction<boolean>>;
     rolledOut: boolean;
 }
+
+export interface AdultDetailsProps<T extends CardData> {
+    data: T;
+    id?: string;
+}

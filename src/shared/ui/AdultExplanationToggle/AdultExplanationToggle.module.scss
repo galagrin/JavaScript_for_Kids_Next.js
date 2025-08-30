@@ -1,0 +1,53 @@
+@use '@/shared/styles/colors' as *;
+@use '@/shared/styles/mixins.scss' as *;
+
+.controls {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.toggle {
+  background: $hexButtonBackground;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: $textDefaultColor;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: $hexButtonHoverBackground;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(253, 225, 134, 0.3);
+  }
+}
+
+// Dark theme styles
+[data-theme='dark'] .toggle {
+  color: $darkThemeResetButtonText;
+  border-color: $darkThemeResetButtonBorder;
+  background: $darkThemeResetButtonBackground;
+
+  &:hover {
+    background: $darkThemeResetButtonHoverBackground;
+    color: $darkThemeResetButtonText;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(254, 244, 169, 0.3);
+  }
+} 
