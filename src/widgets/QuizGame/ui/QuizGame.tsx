@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 
 import { useQuizStore } from '@/entities/quiz';
 
+import { getCategoryName } from '../model/getCategoryName';
+
 import styles from './QuizGame.module.scss';
 
 export const QuizGame = () => {
@@ -12,7 +14,7 @@ export const QuizGame = () => {
         score,
         totalQuestions,
         gameStarted,
-        gameEnded, // <-- добавили
+        gameEnded,
         answered,
         selectedAnswer,
         showResult,
@@ -82,7 +84,7 @@ export const QuizGame = () => {
         return (
             <div className={styles.container}>
                 <div className={styles.welcome}>
-                    <h1>Игра окончена 🎯</h1>
+                    <h1>Игра окончена</h1>
                     <p>
                         Твой счёт: {score} из {totalQuestions}
                     </p>
@@ -179,16 +181,3 @@ export const QuizGame = () => {
         </div>
     );
 };
-
-function getCategoryName(category: string): string {
-    const categoryNames: Record<string, string> = {
-        arrays: 'Массивы',
-        strings: 'Строки',
-        objects: 'Объекты',
-        dates: 'Даты',
-        promises: 'Промисы',
-        numbers: 'Числа',
-        datatypes: 'Типы данных',
-    };
-    return categoryNames[category] || category;
-}
