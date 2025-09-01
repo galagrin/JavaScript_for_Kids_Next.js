@@ -88,7 +88,7 @@ export const QuizGame = () => {
                     <p>
                         Твой счёт: {score} из {totalQuestions}
                     </p>
-                    <div style={{ display: 'flex', gap: 12, marginTop: 12 }}>
+                    <div className={styles.gameEndButtons}>
                         <button onClick={startGame} className={styles.startButton}>
                             Играть снова
                         </button>

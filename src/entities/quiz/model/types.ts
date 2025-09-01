@@ -16,6 +16,7 @@ export interface QuizState {
     answered: boolean;
     selectedAnswer: string | null;
     showResult: boolean;
+    questionSeq: number;
     allMethods: any[];
     loading: boolean;
     error: string | null;

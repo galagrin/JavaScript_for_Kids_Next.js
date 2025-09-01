@@ -57,6 +57,7 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
     allMethods: [],
     loading: false,
     error: null,
+    questionSeq: 0,
 
     // Actions
     startGame: () => {
@@ -68,6 +69,7 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
             answered: false,
             selectedAnswer: null,
             showResult: false,
+            questionSeq: 0, // сбрасываем счётчик в начале игры
         });
         get().generateRandomQuestion();
     },
@@ -88,21 +90,23 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
 
         // Создаем все варианты ответов и перемешиваем их
         const options = shuffle([randomMethod.name, ...wrongAnswers]);
+        set((state) => {
+            const seq = state.questionSeq + 1;
+            const question: QuizQuestion = {
+                id: `q_${seq}`,
+                method: randomMethod.name,
+                description: randomMethod.description,
+                correctAnswer: randomMethod.name,
+                options,
+                category: randomMethod.category || 'arrays',
+            };
 
-        const question: QuizQuestion = {
-            id: `q_${Date.now()}`,
-            method: randomMethod.name,
-            description: randomMethod.description,
-            correctAnswer: randomMethod.name,
-            options,
-            category: randomMethod.category || 'arrays',
-        };
-
-        set({
-            currentQuestion: question,
-            answered: false,
-            selectedAnswer: null,
-            showResult: false,
+            return {
+                currentQuestion: question,
+                answered: false,
+                selectedAnswer: null,
+                showResult: false,
+            };
         });
     },
 
