@@ -15,7 +15,7 @@ jest.mock('../getCategoryName', () => ({
 
 describe('QuizGame', () => {
     beforeEach(() => {
-        jest.clearAllMocks();
+        jest.resetAllMocks();
     });
 
     it('вызывает loadAllMethods при монтировании', () => {
@@ -40,5 +40,28 @@ describe('QuizGame', () => {
 
         render(<QuizGame />);
         expect(loadAllMethods).toHaveBeenCalled();
+    });
+
+    it('показывает загрузку', () => {
+        jest.mocked(useQuizStore).mockReturnValue({
+            currentQuestion: null,
+            score: 0,
+            totalQuestions: 0,
+            gameStarted: false,
+            gameEnded: false,
+            answered: false,
+            selectedAnswer: null,
+            showResult: false,
+            loading: true,
+            error: null,
+            startGame: jest.fn(),
+            selectAnswer: jest.fn(),
+            nextQuestion: jest.fn(),
+            resetGame: jest.fn(),
+            loadAllMethods: jest.fn(),
+        });
+        render(<QuizGame />);
+
+        expect(screen.getByText(/Загружаем данные для викторины.../i)).toBeInTheDocument();
     });
 });
