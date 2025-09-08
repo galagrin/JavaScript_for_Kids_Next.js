@@ -83,7 +83,7 @@ export const NavigationMenu = () => {
                 </li>
                 <li>
                     <NavLink href="/promises" className={styles.navigationLink} onClick={closeMenu}>
-                        Промисы
+;                        Промисы
                     </NavLink>
                 </li>
                 <li>
@@ -98,10 +98,10 @@ export const NavigationMenu = () => {
                 </li>
                 <li>
                     <NavLink href="/quiz" className={styles.navigationLink} onClick={closeMenu}>
-                        Викторина
+                    Викторина
                     </NavLink>
                 </li>
             </ul>
         </nav>
     );
-};
+}

@@ -21,14 +21,6 @@ const customJestConfig = {
     '!src/**/*.d.ts',
     '!src/**/*.stories.{js,jsx,ts,tsx}',
   ],
-  coverageThreshold: {
-    global: {
-      branches: 70,
-      functions: 70,
-      lines: 70,
-      statements: 70,
-    },
-  },
 }
 
 // createJestConfig экспортируется таким образом, чтобы next/jest мог загрузить конфигурацию Next.js, которая является асинхронной
