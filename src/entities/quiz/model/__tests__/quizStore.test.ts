@@ -1,6 +1,17 @@
 import { act, renderHook } from '@testing-library/react';
 import { create } from 'zustand';
 
+import {
+    ApiMethod,
+    fetchArrays,
+    fetchDataTypes,
+    fetchDates,
+    fetchNumbers,
+    fetchObjects,
+    fetchPromises,
+    fetchStrings,
+} from '@/shared/api/apiBase';
+
 import { QuizActions, QuizState } from '../types';
 
 type QuizStore = QuizState & QuizActions;
@@ -15,16 +26,6 @@ jest.mock('@/shared/api/apiBase', () => ({
     fetchNumbers: jest.fn(),
     fetchDataTypes: jest.fn(),
 }));
-
-const {
-    fetchArrays,
-    fetchStrings,
-    fetchObjects,
-    fetchDates,
-    fetchPromises,
-    fetchNumbers,
-    fetchDataTypes,
-} = require('@/shared/api/apiBase');
 
 const mockFetchArrays = fetchArrays as jest.MockedFunction<typeof fetchArrays>;
 const mockFetchStrings = fetchStrings as jest.MockedFunction<typeof fetchStrings>;
@@ -182,11 +183,56 @@ const createTestStore = () => {
 describe('useQuizStore', () => {
     let useTestStore: ReturnType<typeof createTestStore>;
 
-    const mockMethods = [
-        { id: 1, name: 'push', description: 'Добавляет элементы в конец массива', category: 'arrays' },
-        { id: 2, name: 'pop', description: 'Удаляет последний элемент массива', category: 'arrays' },
-        { id: 3, name: 'charAt', description: 'Возвращает символ по индексу', category: 'strings' },
-        { id: 4, name: 'slice', description: 'Извлекает часть строки', category: 'strings' },
+    // Хелпер: создаёт валидный объект ApiMethod c дефолтами
+    const makeMethod = (overrides: Partial<ApiMethod>): ApiMethod => ({
+        id: 0,
+        name: '',
+        description: '',
+        syntax: '',
+        adultExample: '',
+        childExample: '',
+        childExplanation: '',
+        ...overrides,
+    });
+
+    // Моки для API
+    const mockMethods: ApiMethod[] = [
+        makeMethod({
+            id: 1,
+            name: 'push',
+            description: 'Добавляет элементы в конец массива',
+            syntax: 'arr.push(item)',
+            adultExample: '[1].push(2) // [1,2]',
+            childExample: 'Кладём кубик в коробку',
+            childExplanation: 'Добавляем в конец.',
+        }),
+        makeMethod({
+            id: 2,
+            name: 'pop',
+            description: 'Удаляет последний элемент массива',
+            syntax: 'arr.pop()',
+            adultExample: '[1,2].pop() // 2',
+            childExample: 'Достаём кубик из конца',
+            childExplanation: 'Убираем последний.',
+        }),
+        makeMethod({
+            id: 3,
+            name: 'charAt',
+            description: 'Возвращает символ по индексу',
+            syntax: 'str.charAt(i)',
+            adultExample: '"ab".charAt(1) // "b"',
+            childExample: 'Берём букву на позиции',
+            childExplanation: 'Смотрим по номеру.',
+        }),
+        makeMethod({
+            id: 4,
+            name: 'slice',
+            description: 'Извлекает часть строки',
+            syntax: 'str.slice(start, end)',
+            adultExample: '"abcd".slice(1,3) // "bc"',
+            childExample: 'Отрезаем кусочек',
+            childExplanation: 'Берём часть строки.',
+        }),
     ];
 
     beforeEach(() => {
@@ -203,7 +249,7 @@ describe('useQuizStore', () => {
 
     it('имеет правильное начальное состояние', () => {
         const { result } = renderHook(() => useTestStore());
-        
+
         expect(result.current.currentQuestion).toBe(null);
         expect(result.current.score).toBe(0);
         expect(result.current.totalQuestions).toBe(0);
@@ -260,7 +306,7 @@ describe('useQuizStore', () => {
 
     it('запускает игру и генерирует первый вопрос', () => {
         const { result } = renderHook(() => useTestStore());
-        
+
         // Сначала загружаем методы
         act(() => {
             result.current.allMethods = mockMethods;
@@ -280,7 +326,7 @@ describe('useQuizStore', () => {
 
     it('правильно обрабатывает выбор правильного ответа', () => {
         const { result } = renderHook(() => useTestStore());
-        
+
         // Подготавливаем данные
         act(() => {
             result.current.allMethods = mockMethods;
@@ -308,7 +354,7 @@ describe('useQuizStore', () => {
 
     it('правильно обрабатывает выбор неправильного ответа', () => {
         const { result } = renderHook(() => useTestStore());
-        
+
         act(() => {
             result.current.allMethods = mockMethods;
             result.current.currentQuestion = {
@@ -334,7 +380,7 @@ describe('useQuizStore', () => {
 
     it('завершает игру после максимального количества вопросов', () => {
         const { result } = renderHook(() => useTestStore());
-        
+
         act(() => {
             result.current.allMethods = mockMethods;
             result.current.currentQuestion = {
@@ -358,7 +404,7 @@ describe('useQuizStore', () => {
 
     it('переходит к следующему вопросу', () => {
         const { result } = renderHook(() => useTestStore());
-        
+
         act(() => {
             result.current.allMethods = mockMethods;
             result.current.answered = true;
@@ -377,7 +423,7 @@ describe('useQuizStore', () => {
 
     it('завершает игру при переходе к следующему вопросу если игра закончена', () => {
         const { result } = renderHook(() => useTestStore());
-        
+
         act(() => {
             result.current.gameEnded = true;
         });
@@ -393,7 +439,7 @@ describe('useQuizStore', () => {
 
     it('сбрасывает игру к начальному состоянию', () => {
         const { result } = renderHook(() => useTestStore());
-        
+
         // Устанавливаем некоторое состояние игры
         act(() => {
             result.current.gameStarted = true;
@@ -418,7 +464,7 @@ describe('useQuizStore', () => {
 
     it('не позволяет выбрать ответ если уже отвечено', () => {
         const { result } = renderHook(() => useTestStore());
-        
+
         act(() => {
             result.current.currentQuestion = {
                 id: 'test',
@@ -443,7 +489,7 @@ describe('useQuizStore', () => {
 
     it('не генерирует вопрос если нет методов', () => {
         const { result } = renderHook(() => useTestStore());
-        
+
         act(() => {
             result.current.allMethods = [];
         });
