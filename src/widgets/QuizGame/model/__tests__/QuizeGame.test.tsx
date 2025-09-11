@@ -1,9 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { shallow } from 'zustand/shallow';
 
 import { useQuizStore } from '@/entities/quiz';
 
 import { QuizGame } from '../../ui/QuizGame';
+import { getCategoryName } from '../getCategoryName';
 
 jest.mock('@/entities/quiz', () => ({
     useQuizStore: jest.fn(),
@@ -34,7 +36,7 @@ const makeStore = (overrides: Partial<ReturnType<typeof useQuizStore>> = {}) => 
 });
 describe('QuizGame', () => {
     beforeEach(() => {
-        jest.resetAllMocks();
+        jest.clearAllMocks();
     });
 
     it('вызывает loadAllMethods при монтировании', () => {
@@ -89,5 +91,80 @@ describe('QuizGame', () => {
         expect(screen.getByText(/JavaScript Викторина/i)).toBeInTheDocument();
         await user.click(screen.getByRole('button', { name: /Начать игру/i }));
         expect(startGame).toHaveBeenCalled();
+    });
+
+    it('показывает экран вопроса и отдаёт ответ в selectAnswer', async () => {
+        const user = userEvent.setup();
+        const question = {
+            id: 'q1',
+            method: 'push',
+            description: 'Добавляет элементы',
+            correctAnswer: 'push',
+            options: ['push', 'pop', 'slice', 'charAt'],
+            category: 'arrays',
+        };
+        const store = makeStore({
+            gameStarted: true,
+            currentQuestion: question,
+        });
+        jest.mocked(useQuizStore).mockReturnValue(store);
+
+        render(<QuizGame />);
+        expect(screen.getByText('Вопрос 1')).toBeInTheDocument();
+        expect(getCategoryName).toHaveBeenCalledWith('arrays');
+        expect(screen.getByText('Добавляет элементы')).toBeInTheDocument();
+
+        const popBtn = screen.getByRole('button', { name: /pop/i });
+        await user.click(popBtn);
+        expect(store.selectAnswer).toHaveBeenCalledWith('pop');
+    });
+
+    it('Показывает результат и дает нажать Следующий вопрос', async () => {
+        const user = userEvent.setup();
+        const question = {
+            id: 'q1',
+            method: 'push',
+            description: 'Добавляет элементы',
+            correctAnswer: 'push',
+            options: ['push', 'pop', 'slice', 'charAt'],
+            category: 'arrays',
+        };
+        const store = makeStore({
+            gameStarted: true,
+            currentQuestion: question,
+            answered: true,
+            selectedAnswer: 'push',
+            showResult: true,
+        });
+        jest.mocked(useQuizStore).mockReturnValue(store);
+
+        render(<QuizGame />);
+        expect(screen.getByText('Правильно!')).toBeInTheDocument();
+        expect(screen.getByText('Следующий вопрос')).toBeInTheDocument();
+        await user.click(screen.getByRole('button', { name: /Следующий вопрос/i }));
+        expect(store.nextQuestion).toHaveBeenCalled();
+    });
+
+    it('На неправильный ответ выводит "Неправильно. Правильный ответ:"', () => {
+        const user = userEvent.setup();
+        const question = {
+            id: 'q1',
+            method: 'push',
+            description: 'Добавляет элементы',
+            correctAnswer: 'push',
+            options: ['push', 'pop', 'slice', 'charAt'],
+            category: 'arrays',
+        };
+        const store = makeStore({
+            gameStarted: true,
+            currentQuestion: question,
+            answered: true,
+            selectedAnswer: 'pop',
+            showResult: true,
+        });
+        jest.mocked(useQuizStore).mockReturnValue(store);
+
+        render(<QuizGame />);
+        expect(screen.getByText('Неправильно. Правильный ответ:')).toBeInTheDocument();
     });
 });
