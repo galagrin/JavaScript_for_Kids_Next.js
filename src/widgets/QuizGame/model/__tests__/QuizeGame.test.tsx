@@ -146,7 +146,6 @@ describe('QuizGame', () => {
     });
 
     it('На неправильный ответ выводит "Неправильно. Правильный ответ:"', () => {
-        const user = userEvent.setup();
         const question = {
             id: 'q1',
             method: 'push',
@@ -166,5 +165,51 @@ describe('QuizGame', () => {
 
         render(<QuizGame />);
         expect(screen.getByText('Неправильно. Правильный ответ:')).toBeInTheDocument();
+    });
+
+    it('показывает финальный экран и даёт перезапустить', async () => {
+        const user = userEvent.setup();
+        const store = makeStore({
+            gameEnded: true,
+            gameStarted: true,
+            showResult: false,
+            score: 2,
+            totalQuestions: 2,
+        });
+        jest.mocked(useQuizStore).mockReturnValue(store);
+        render(<QuizGame />);
+
+        expect(screen.getByText(/Игра окончена/i)).toBeInTheDocument();
+        expect(screen.getByText(/Твой счёт: 2 из 2/)).toBeInTheDocument();
+
+        await user.click(screen.getByRole('button', { name: /В меню/i }));
+        expect(store.resetGame).toHaveBeenCalled();
+
+        await user.click(screen.getByRole('button', { name: /Играть снова/i }));
+        expect(store.startGame).toHaveBeenCalled();
+    });
+
+    it('кнопка "Заново"в футере вызывает resetGame', async () => {
+        const user = userEvent.setup();
+        const question = {
+            id: 'q1',
+            method: 'push',
+            description: 'Добавляет элементы',
+            correctAnswer: 'push',
+            options: ['push', 'pop'],
+            category: 'arrays',
+        };
+        const store = makeStore({
+            gameStarted: true,
+            currentQuestion: question,
+            score: 1,
+            totalQuestions: 1,
+        });
+        jest.mocked(useQuizStore).mockReturnValue(store);
+
+        render(<QuizGame />);
+
+        await user.click(screen.getByRole('button', { name: /Заново/i }));
+        expect(store.resetGame).toHaveBeenCalled();
     });
 });
