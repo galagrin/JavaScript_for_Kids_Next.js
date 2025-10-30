@@ -19,6 +19,17 @@
     --hex-content-color: #{$hexContentColor};
     --hex-button-background: #{$hexButtonBackground};
     --hex-button-hover-background: #{$hexButtonHoverBackground};
+
+    --quiz-primary-text: #{$quizPrimaryText};
+    --quiz-secondary-text: #{$quizSecondaryText};
+    --quiz-light-background: #{$quizLightBackground};
+    --quiz-border-color: #{$quizBorderColor};
+    --quiz-success-color: #{$quizSuccessColor};
+    --quiz-error-color: #{$quizErrorColor};
+    --quiz-success-background: #{$quizSuccessBackground};
+    --quiz-error-background: #{$quizErrorBackground};
+    --quiz-focus-outline: #{$quizFocusOutline};
+    --quiz-shadow-light: #{$quizShadowLight};
 }
 
 [data-theme='dark'] {

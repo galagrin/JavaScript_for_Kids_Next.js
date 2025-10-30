@@ -1,10 +1,12 @@
-@import '@/shared/styles/colors.scss';
-@import '@/shared/styles/mixins.scss';
+// 1. Импортируем цвета с неймспейсом 'c', а миксины - глобально
+@use '@/shared/styles/colors.scss' as c;
+@use '@/shared/styles/mixins.scss' as *;
 
+// 2. Весь основной код использует CSS-переменные (var(--...))
 .container {
     min-height: calc(100vh - 120px);
     padding: 2rem;
-    background: linear-gradient(135deg, var(--background) 0%, $quizLightBackground 100%);
+    background: linear-gradient(135deg, var(--background) 0%, var(--quiz-light-background) 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,19 +21,19 @@
     background: var(--hex-background-default);
     padding: 3rem;
     border-radius: 20px;
-    box-shadow: 0 10px 30px $quizShadowLight;
-    border: 1px solid $quizBorderColor;
+    box-shadow: 0 10px 30px var(--quiz-shadow-light);
+    border: 1px solid var(--quiz-border-color);
 
     h1 {
         font-size: 2.5rem;
         margin-bottom: 1rem;
-        color: $quizPrimaryText;
-        text-shadow: 2px 2px 4px $quizShadowLight;
+        color: var(--quiz-primary-text);
+        text-shadow: 2px 2px 4px var(--quiz-shadow-light);
     }
 
     > p {
         font-size: 1.2rem;
-        color: $quizSecondaryText;
+        color: var(--quiz-secondary-text);
         margin-bottom: 2rem;
     }
 }
@@ -39,13 +41,13 @@
 .rules {
     text-align: left;
     margin: 2rem 0;
-    background: $quizLightBackground;
+    background: var(--quiz-light-background);
     padding: 1.5rem;
     border-radius: 15px;
     border-left: 4px solid var(--hex-button-background);
 
     h3 {
-        color: $quizPrimaryText;
+        color: var(--quiz-primary-text);
         margin-bottom: 1rem;
         font-size: 1.1rem;
     }
@@ -55,7 +57,7 @@
         padding: 0;
 
         li {
-            color: $quizSecondaryText;
+            color: var(--quiz-secondary-text);
             margin-bottom: 0.8rem;
             position: relative;
             padding-left: 1.5rem;
@@ -64,7 +66,7 @@
                 content: '✓';
                 position: absolute;
                 left: 0;
-                color: $quizSuccessColor;
+                color: var(--quiz-success-color);
                 font-weight: bold;
             }
         }
@@ -78,30 +80,30 @@
     padding: 1rem 2rem;
     cursor: pointer;
     font-size: 1.2rem;
-    color: $quizPrimaryText;
+    color: var(--quiz-primary-text);
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px $quizShadowLight;
+    box-shadow: 0 2px 4px var(--quiz-shadow-light);
 
     &:hover {
         background: var(--hex-button-hover-background);
         transform: translateY(-1px);
-        box-shadow: 0 4px 8px $quizShadowMedium;
+        box-shadow: 0 4px 8px var(--quiz-shadow-medium);
     }
 
     &:active {
         transform: translateY(0);
-        box-shadow: 0 2px 4px $quizShadowLight;
+        box-shadow: 0 2px 4px var(--quiz-shadow-light);
     }
 
     &:focus {
         outline: none;
-        box-shadow: 0 0 0 3px $quizFocusOutline;
+        box-shadow: 0 0 0 3px var(--quiz-focus-outline);
     }
 }
 
 .loading {
     text-align: center;
-    color: $quizSecondaryText;
+    color: var(--quiz-secondary-text);
 
     p {
         margin-top: 1rem;
@@ -112,8 +114,8 @@
 .spinner {
     width: 40px;
     height: 40px;
-    border: 4px solid var(--border-color);
-    border-top: 4px solid var(--accent-color);
+    border: 4px solid var(--border-color, #e0e0e0);
+    border-top: 4px solid var(--accent-color, #007bff);
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin: 0 auto;
@@ -133,15 +135,15 @@
     background: var(--hex-background-default);
     padding: 2rem;
     border-radius: 15px;
-    border: 1px solid $quizErrorColor;
+    border: 1px solid var(--quiz-error-color);
 
     h2 {
-        color: $quizErrorColor;
+        color: var(--quiz-error-color);
         margin-bottom: 1rem;
     }
 
     p {
-        color: $quizSecondaryText;
+        color: var(--quiz-secondary-text);
         margin-bottom: 1.5rem;
     }
 }
@@ -153,25 +155,25 @@
     padding: 0.5rem 1rem;
     cursor: pointer;
     font-size: 0.95rem;
-    color: $quizPrimaryText;
+    color: var(--quiz-primary-text);
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px $quizShadowLight;
+    box-shadow: 0 2px 4px var(--quiz-shadow-light);
     margin-bottom: 0.25rem;
 
     &:hover {
         background: var(--hex-button-hover-background);
         transform: translateY(-1px);
-        box-shadow: 0 4px 8px $quizShadowMedium;
+        box-shadow: 0 4px 8px var(--quiz-shadow-medium);
     }
 
     &:active {
         transform: translateY(0);
-        box-shadow: 0 2px 4px $quizShadowLight;
+        box-shadow: 0 2px 4px var(--quiz-shadow-light);
     }
 
     &:focus {
         outline: none;
-        box-shadow: 0 0 0 3px $quizFocusOutline;
+        box-shadow: 0 0 0 3px var(--quiz-focus-outline);
     }
 }
 
@@ -182,7 +184,7 @@
     padding: 1.5rem;
     background: var(--hex-background-default);
     border-radius: 15px;
-    border: 1px solid $quizBorderColor;
+    border: 1px solid var(--quiz-border-color);
     max-width: 800px;
     width: 100%;
 }
@@ -190,11 +192,11 @@
 .score {
     font-size: 1.1rem;
     font-weight: 600;
-    color: $quizPrimaryText;
-    background: $quizLightBackground;
+    color: var(--quiz-primary-text);
+    background: var(--quiz-light-background);
     padding: 0.6rem 1.2rem;
     border-radius: 8px;
-    border: 1px solid $quizBorderColor;
+    border: 1px solid var(--quiz-border-color);
 }
 
 .resetButton {
@@ -204,24 +206,24 @@
     padding: 1rem 2rem;
     cursor: pointer;
     font-size: 1.2rem;
-    color: $quizPrimaryText;
+    color: var(--quiz-primary-text);
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px $quizShadowLight;
+    box-shadow: 0 2px 4px var(--quiz-shadow-light);
 
     &:hover {
         background: var(--hex-button-hover-background);
         transform: translateY(-1px);
-        box-shadow: 0 4px 8px $quizShadowMedium;
+        box-shadow: 0 4px 8px var(--quiz-shadow-medium);
     }
 
     &:active {
         transform: translateY(0);
-        box-shadow: 0 2px 4px $quizShadowLight;
+        box-shadow: 0 2px 4px var(--quiz-shadow-light);
     }
 
     &:focus {
         outline: none;
-        box-shadow: 0 0 0 3px $quizFocusOutline;
+        box-shadow: 0 0 0 3px var(--quiz-focus-outline);
     }
 }
 
@@ -229,8 +231,8 @@
     background: var(--hex-background-default);
     border-radius: 20px;
     padding: 2.5rem;
-    box-shadow: 0 15px 35px $quizShadowLight;
-    border: 1px solid $quizBorderColor;
+    box-shadow: 0 15px 35px var(--quiz-shadow-light);
+    border: 1px solid var(--quiz-border-color);
     max-width: 800px;
     width: 100%;
 }
@@ -244,7 +246,7 @@
 
 .questionNumber {
     background: var(--hex-button-background);
-    color: $quizPrimaryText;
+    color: var(--quiz-primary-text);
     padding: 0.5rem 1rem;
     border-radius: 15px;
     font-weight: 600;
@@ -252,12 +254,12 @@
 }
 
 .category {
-    background: $quizLightBackground;
-    color: $quizSecondaryText;
+    background: var(--quiz-light-background);
+    color: var(--quiz-secondary-text);
     padding: 0.5rem 1rem;
     border-radius: 15px;
     font-size: 0.9rem;
-    border: 1px solid $quizBorderColor;
+    border: 1px solid var(--quiz-border-color);
 }
 
 .questionContent {
@@ -265,17 +267,17 @@
     text-align: center;
 
     h2 {
-        color: $quizPrimaryText;
+        color: var(--quiz-primary-text);
         font-size: 1.8rem;
         margin-bottom: 1rem;
     }
 }
 
 .description {
-    color: $quizSecondaryText;
+    color: var(--quiz-secondary-text);
     font-size: 1.1rem;
     line-height: 1.6;
-    background: $quizLightBackground;
+    background: var(--quiz-light-background);
     padding: 1.5rem;
     border-radius: 15px;
     border-left: 4px solid var(--hex-button-background);
@@ -293,7 +295,7 @@
     align-items: center;
     padding: 1.2rem;
     background: var(--hex-background-default);
-    border: 2px solid $quizBorderColor;
+    border: 2px solid var(--quiz-border-color);
     border-radius: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -301,27 +303,27 @@
 
     &:hover:not(.disabled) {
         border-color: var(--hex-button-background);
-        background: $quizLightBackground;
+        background: var(--quiz-light-background);
         transform: translateX(5px);
     }
 
     &.correct {
-        border-color: $quizSuccessColor;
-        background: $quizSuccessBackground;
+        border-color: var(--quiz-success-color);
+        background: var(--quiz-success-background);
 
         .optionLetter {
-            background: $quizSuccessColor;
-            color: $quizPrimaryText;
+            background: var(--quiz-success-color);
+            color: var(--quiz-primary-text);
         }
     }
 
     &.incorrect {
-        border-color: $quizErrorColor;
-        background: $quizErrorBackground;
+        border-color: var(--quiz-error-color);
+        background: var(--quiz-error-background);
 
         .optionLetter {
-            background: $quizErrorColor;
-            color: $quizPrimaryText;
+            background: var(--quiz-error-color);
+            color: var(--quiz-primary-text);
         }
     }
 
@@ -333,7 +335,7 @@
 
 .optionLetter {
     background: var(--hex-button-background);
-    color: $quizPrimaryText;
+    color: var(--quiz-primary-text);
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -346,20 +348,20 @@
 }
 
 .optionText {
-    color: $quizPrimaryText;
+    color: var(--quiz-primary-text);
     font-weight: 500;
 }
 
 .result {
     text-align: center;
     padding: 2rem;
-    background: $quizLightBackground;
+    background: var(--quiz-light-background);
     border-radius: 15px;
-    border: 1px solid $quizBorderColor;
+    border: 1px solid var(--quiz-border-color);
 }
 
 .correctResult {
-    color: var(--success-color);
+    color: var(--quiz-success-color);
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
@@ -370,7 +372,7 @@
 }
 
 .incorrectResult {
-    color: $quizErrorColor;
+    color: var(--quiz-error-color);
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
     display: flex;
@@ -380,11 +382,11 @@
     flex-wrap: wrap;
 
     strong {
-        color: $quizPrimaryText;
+        color: var(--quiz-primary-text);
         background: var(--hex-background-default);
         padding: 0.2rem 0.5rem;
         border-radius: 5px;
-        border: 1px solid $quizBorderColor;
+        border: 1px solid var(--quiz-border-color);
     }
 }
 
@@ -399,24 +401,24 @@
     padding: 0.8rem 1.5rem;
     cursor: pointer;
     font-size: 1rem;
-    color: $quizPrimaryText;
+    color: var(--quiz-primary-text);
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px $quizShadowLight;
+    box-shadow: 0 2px 4px var(--quiz-shadow-light);
 
     &:hover {
         background: var(--hex-button-hover-background);
         transform: translateY(-1px);
-        box-shadow: 0 4px 8px $quizShadowMedium;
+        box-shadow: 0 4px 8px var(--quiz-shadow-medium);
     }
 
     &:active {
         transform: translateY(0);
-        box-shadow: 0 2px 4px $quizShadowLight;
+        box-shadow: 0 2px 4px var(--quiz-shadow-light);
     }
 
     &:focus {
         outline: none;
-        box-shadow: 0 0 0 3px $quizFocusOutline;
+        box-shadow: 0 0 0 3px var(--quiz-focus-outline);
     }
 }
 
@@ -467,38 +469,38 @@
     }
 }
 
-// Dark theme styles - only backgrounds and borders, NO text color changes
+// 3. Стили темной темы используют Sass-переменные через неймспейс 'c'
 [data-theme='dark'] {
     .container {
         background: var(--background);
     }
 
     .score {
-        background: $quizDarkModeWhite10;
-        border-color: $quizDarkModeWhite20;
+        background: c.$quizDarkModeWhite10;
+        border-color: c.$quizDarkModeWhite20;
     }
 
     .category {
-        background: $quizDarkModeWhite10;
-        border-color: $quizDarkModeWhite20;
+        background: c.$quizDarkModeWhite10;
+        border-color: c.$quizDarkModeWhite20;
     }
 
     .description {
-        background: $quizSlateGray;
+        background: var(--quiz-slate-gray);
     }
 
     .option {
-        border-color: $quizSlateGray;
+        border-color: var(--quiz-slate-gray);
 
         &:hover:not(.disabled) {
-            background: $quizSlateGray;
+            background: var(--quiz-slate-gray);
         }
     }
 
     .incorrectResult {
         strong {
-            background: $quizDarkModeWhite10;
-            border-color: $quizDarkModeWhite20;
+            background: c.$quizDarkModeWhite10;
+            border-color: c.$quizDarkModeWhite20;
         }
     }
 }
