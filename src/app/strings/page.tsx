@@ -1,4 +1,4 @@
-import { StringsPage } from '@/pages/strings/StringsPage';
+import { StringsPage } from '@/views/strings/StringsPage';
 
 export const metadata = {
     title: 'Строки в JS',

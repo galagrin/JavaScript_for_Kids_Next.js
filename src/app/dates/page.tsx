@@ -1,4 +1,4 @@
-import { DatesPage } from '@/pages/dates/ui/DatesPage';
+import { DatesPage } from '@/views/dates/ui/DatesPage';
 
 export const metadata = {
     title: 'Даты в JS',

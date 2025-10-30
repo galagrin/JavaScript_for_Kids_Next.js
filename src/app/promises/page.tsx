@@ -1,4 +1,4 @@
-import { PromisesPage } from '@/pages/promises/ui/PromisesPage';
+import { PromisesPage } from '@/views/promises/ui/PromisesPage';
 
 export const metadata = {
     title: 'Промисы в JS',

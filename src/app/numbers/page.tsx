@@ -1,4 +1,4 @@
-import { NumbersPage } from '@/pages/numbers/ui/NumbersPage';
+import { NumbersPage } from '@/views/numbers/ui/NumbersPage';
 
 export const metadata = {
     title: 'Числа в JS',

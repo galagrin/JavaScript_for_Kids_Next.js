@@ -1,4 +1,4 @@
-import { DataTypesPage } from '@/pages/datatypes/ui/DataTypesPage';
+import { DataTypesPage } from '@/views/datatypes/ui/DataTypesPage';
 
 export const metadata = {
     title: 'Типы данных в JS',

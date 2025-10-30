@@ -1,4 +1,4 @@
-import { ObjectsPage } from '@/pages/objects/ui/ObjectsPage';
+import { ObjectsPage } from '@/views/objects/ui/ObjectsPage';
 
 export const metadata = {
     title: 'Объекты в JS',

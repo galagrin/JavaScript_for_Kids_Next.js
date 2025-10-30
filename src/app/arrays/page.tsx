@@ -1,4 +1,4 @@
-import ArraysPage from '@/pages/arrays/ui/ArraysPage';
+import ArraysPage from '@/views/arrays/ui/ArraysPage';
 
 export const metadata = {
     title: 'Массивы в JS',
