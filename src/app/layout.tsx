@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 import { Geist, Geist_Mono, Inter } from 'next/font/google';
 import { Header } from 'widgets/Header/ui/Header';
+
 import { DataPreloader } from '@/shared/ui/DataPreloader/DataPreloader';
 
 import './styles/globals.scss';
@@ -9,16 +10,19 @@ import './styles/globals.scss';
 const geistSans = Geist({
     variable: '--font-geist-sans',
     subsets: ['latin'],
+    display: 'swap',
 });
 
 const geistMono = Geist_Mono({
     variable: '--font-geist-mono',
     subsets: ['latin'],
+    display: 'swap',
 });
 
 const inter = Inter({
     subsets: ['cyrillic'],
     variable: '--font-inter',
+    display: 'swap',
 });
 
 export const metadata: Metadata = {
