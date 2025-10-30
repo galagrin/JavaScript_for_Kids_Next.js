@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import NavLink from '@/entities/navlink/ui/NavLink';
 
@@ -44,7 +44,7 @@ export const NavigationMenu = () => {
 
     return (
         <nav className={styles.navigation} ref={menuRef}>
-            <button 
+            <button
                 className={styles.burgerButton}
                 onClick={toggleMenu}
                 aria-label={isMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
@@ -54,7 +54,7 @@ export const NavigationMenu = () => {
                 <span className={`${styles.burgerLine} ${isMenuOpen ? styles.burgerLineActive : ''}`}></span>
                 <span className={`${styles.burgerLine} ${isMenuOpen ? styles.burgerLineActive : ''}`}></span>
             </button>
-            
+
             <ul className={`${styles.navigationList} ${isMenuOpen ? styles.navigationListOpen : ''}`}>
                 <li>
                     <NavLink href="/" exact className={styles.navigationLink} onClick={closeMenu}>
@@ -83,7 +83,7 @@ export const NavigationMenu = () => {
                 </li>
                 <li>
                     <NavLink href="/promises" className={styles.navigationLink} onClick={closeMenu}>
-;                        Промисы
+                        Промисы
                     </NavLink>
                 </li>
                 <li>
@@ -98,10 +98,10 @@ export const NavigationMenu = () => {
                 </li>
                 <li>
                     <NavLink href="/quiz" className={styles.navigationLink} onClick={closeMenu}>
-                    Викторина
+                        Викторина
                     </NavLink>
                 </li>
             </ul>
         </nav>
     );
-}
+};

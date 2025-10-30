@@ -1,5 +1,3 @@
-'use client';
-
 import { useEffect } from 'react';
 
 import { useArraysStore } from '@/entities/arrays/model/store';
@@ -15,5 +13,12 @@ export default function ArraysPage() {
         }
     }, [arraysList, fetchAllArraysList]);
 
-    return <CardViewer items={arraysList.map(item => ({ ...item, id: String(item.id) }))} isLoading={loadingAllArrays} error={errorAllArrays} progressKey="arrays" />;
+    return (
+        <CardViewer
+            items={arraysList.map((item) => ({ ...item, id: String(item.id) }))}
+            isLoading={loadingAllArrays}
+            error={errorAllArrays}
+            progressKey="arrays"
+        />
+    );
 }

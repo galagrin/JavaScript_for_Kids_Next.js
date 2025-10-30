@@ -1,9 +1,4 @@
-import axios from 'axios';
-
 const API_URL = 'https://jsapi-alpha.vercel.app';
-
-// Кэш для API запросов
-const apiCache = new Map<string, { data: any; timestamp: number; expiry: number }>();
 
 export interface ApiMethod {
     id: number;
@@ -26,70 +21,29 @@ export class ApiError extends Error {
     }
 }
 
-export const fetchApi = async (endpoint: string, forceRefresh = false): Promise<ApiMethod[]> => {
-    const cacheKey = endpoint;
-    const now = Date.now();
-    
-    // Проверяем кэш
-    if (!forceRefresh && apiCache.has(cacheKey)) {
-        const cached = apiCache.get(cacheKey)!;
-        if (now - cached.timestamp < cached.expiry) {
-            return cached.data;
-        }
-    }
-    
+export const fetchApi = async (endpoint: string): Promise<ApiMethod[]> => {
     try {
-        const response = await axios.get(`${API_URL}/${endpoint}`);
-        const data = response.data;
-        
-        // Сохраняем в кэш на 5 минут
-        apiCache.set(cacheKey, {
-            data,
-            timestamp: now,
-            expiry: 5 * 60 * 1000 // 5 минут
-        });
-        
-        return data;
+        const response = await fetch(`${API_URL}/${endpoint}`);
+
+        if (!response.ok) {
+            const message = await response.text().catch(() => 'Ошибка ответа сервера');
+            throw new ApiError(message, response.status, endpoint);
+        }
+
+        return await response.json();
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            const status = error.response?.status;
-            const message = error.response?.data?.message || error.message || 'Произошла ошибка при получении данных';
-            throw new ApiError(message, status, endpoint);
+        if (error instanceof Error) {
+            throw new ApiError(error.message, undefined, endpoint);
         }
         throw new ApiError('Неизвестная ошибка при получении данных', undefined, endpoint);
     }
 };
 
-// Функция для очистки кэша
-export const clearApiCache = () => {
-    apiCache.clear();
-};
-
-// Специализированные функции для каждого типа данных
-export const fetchArrays = async (forceRefresh = false): Promise<ApiMethod[]> => {
-    return fetchApi('all-arrays', forceRefresh);
-};
-
-export const fetchStrings = async (forceRefresh = false): Promise<ApiMethod[]> => {
-    return fetchApi('strings', forceRefresh);
-};
-
-export const fetchObjects = async (forceRefresh = false): Promise<ApiMethod[]> => {
-    return fetchApi('objects', forceRefresh);
-};
-
-export const fetchDates = async (forceRefresh = false): Promise<ApiMethod[]> => {
-    return fetchApi('date', forceRefresh);
-};
-
-export const fetchPromises = async (forceRefresh = false): Promise<ApiMethod[]> => {
-    return fetchApi('promise', forceRefresh);
-};
-
-export const fetchNumbers = async (forceRefresh = false): Promise<ApiMethod[]> => {
-    return fetchApi('number', forceRefresh);
-};
-
-export const fetchDataTypes = async (forceRefresh = false): Promise<ApiMethod[]> => {
-    return fetchApi('datatypes', forceRefresh);
-};
+// Специализированные функции — forceRefresh больше не нужен
+export const fetchArrays = async (): Promise<ApiMethod[]> => fetchApi('all-arrays');
+export const fetchStrings = async (): Promise<ApiMethod[]> => fetchApi('strings');
+export const fetchObjects = async (): Promise<ApiMethod[]> => fetchApi('objects');
+export const fetchDates = async (): Promise<ApiMethod[]> => fetchApi('date');
+export const fetchPromises = async (): Promise<ApiMethod[]> => fetchApi('promise');
+export const fetchNumbers = async (): Promise<ApiMethod[]> => fetchApi('number');
+export const fetchDataTypes = async (): Promise<ApiMethod[]> => fetchApi('datatypes');
