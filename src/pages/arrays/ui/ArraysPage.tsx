@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 
 import { useArraysStore } from '@/entities/arrays/model/store';
