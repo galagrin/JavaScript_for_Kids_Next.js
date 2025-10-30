@@ -6,7 +6,7 @@ import { useStringsStore } from '@/entities/strings';
 
 import { CardViewer } from '@/widgets/CardViewer/ui/CardViewer';
 
-const StringsPage = () => {
+export function StringsPage() {
     const { stringsList, fetchAllStringsList, loadingAllStrings, errorAllStrings } = useStringsStore();
 
     useEffect(() => {
@@ -23,5 +23,4 @@ const StringsPage = () => {
             progressKey="strings"
         />
     );
-};
-export default StringsPage;
+}

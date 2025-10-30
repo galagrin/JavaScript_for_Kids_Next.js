@@ -6,7 +6,7 @@ import { useDatesStore } from '@/entities/dates';
 
 import { CardViewer } from '@/widgets/CardViewer/ui/CardViewer';
 
-const DatesPage = () => {
+export function DatesPage() {
     const { datesList, fetchAllDatesList, loadingAllDates, errorAllDates } = useDatesStore();
 
     useEffect(() => {
@@ -23,5 +23,4 @@ const DatesPage = () => {
             progressKey="dates"
         />
     );
-};
-export default DatesPage;
+}

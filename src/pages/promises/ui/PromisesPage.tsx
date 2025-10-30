@@ -6,7 +6,7 @@ import { usePromisesStore } from '@/entities/promises';
 
 import { CardViewer } from '@/widgets/CardViewer/ui/CardViewer';
 
-const PromisesPage = () => {
+export function PromisesPage() {
     const { promisesList, fetchAllPromisesList, loadingAllPromises, errorAllPromises } = usePromisesStore();
 
     useEffect(() => {
@@ -23,5 +23,4 @@ const PromisesPage = () => {
             progressKey="promises"
         />
     );
-};
-export default PromisesPage;
+}

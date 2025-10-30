@@ -6,7 +6,7 @@ import { useNumbersStore } from '@/entities/numbers';
 
 import { CardViewer } from '@/widgets/CardViewer/ui/CardViewer';
 
-const NumbersPage = () => {
+export function NumbersPage() {
     const { numbersList, fetchAllNumbersList, loadingAllNumbers, errorAllNumbers } = useNumbersStore();
 
     useEffect(() => {
@@ -23,5 +23,4 @@ const NumbersPage = () => {
             progressKey="numbers"
         />
     );
-};
-export default NumbersPage;
+}

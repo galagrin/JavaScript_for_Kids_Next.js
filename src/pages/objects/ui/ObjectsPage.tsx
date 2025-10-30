@@ -8,7 +8,7 @@ import { CardViewer } from '@/widgets/CardViewer/ui/CardViewer';
 
 import styles from './ObjectsPage.module.scss';
 
-const ObjectsPage = () => {
+export function ObjectsPage() {
     const { objectsList, fetchAllObjectsList, loadingAllObjects, errorAllObjects } = useObjectsStore();
 
     useEffect(() => {
@@ -25,5 +25,4 @@ const ObjectsPage = () => {
             progressKey="objects"
         />
     );
-};
-export default ObjectsPage;
+}

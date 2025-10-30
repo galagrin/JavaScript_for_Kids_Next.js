@@ -6,7 +6,7 @@ import { useDataTypesStore } from '@/entities/datatypes';
 
 import { CardViewer } from '@/widgets/CardViewer/ui/CardViewer';
 
-export const DataTypesPage = () => {
+export function DataTypesPage() {
     const { dataTypesList, fetchAllDataTypesList, loadingAllDataTypes, errorAllDataTypes } = useDataTypesStore();
 
     useEffect(() => {
@@ -23,4 +23,4 @@ export const DataTypesPage = () => {
             progressKey="datatypes"
         />
     );
-};
+}
