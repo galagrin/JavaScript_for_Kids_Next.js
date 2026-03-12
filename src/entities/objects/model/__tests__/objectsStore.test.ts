@@ -60,7 +60,7 @@ describe('useObjectsStore', () => {
                 syntax: 'Object.keys(obj)',
                 adultExample: "Object.keys({a: 1, b: 2}); // ['a', 'b']",
                 childExample: "Object.keys({имя: 'Вася', возраст: 10}); // ['имя', 'возраст']",
-                childExplanation: "Это как если бы ты хотел узнать, какие ярлычки есть на коробках с игрушками.",
+                childExplanation: 'Это как если бы ты хотел узнать, какие ярлычки есть на коробках с игрушками.',
             },
         ];
         mockFetchObjects.mockResolvedValueOnce(mockData);

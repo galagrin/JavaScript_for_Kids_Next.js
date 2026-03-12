@@ -58,9 +58,9 @@ describe('useDatesStore', () => {
                 name: 'new Date',
                 description: 'Создает новый объект Date.',
                 syntax: 'new Date()',
-                adultExample: "new Date(); // текущая дата",
-                childExample: "new Date(); // сегодняшний день",
-                childExplanation: "Это как если бы ты посмотрел на календарь и узнал, какой сегодня день.",
+                adultExample: 'new Date(); // текущая дата',
+                childExample: 'new Date(); // сегодняшний день',
+                childExplanation: 'Это как если бы ты посмотрел на календарь и узнал, какой сегодня день.',
             },
         ];
         mockFetchDates.mockResolvedValueOnce(mockData);

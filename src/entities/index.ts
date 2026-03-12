@@ -24,4 +24,4 @@ export type { NumbersState, NumbersActions } from './numbers';
 
 // DataTypes
 export { useDataTypesStore } from './datatypes';
-export type { DataTypesState, DataTypesActions } from './datatypes'; 
+export type { DataTypesState, DataTypesActions } from './datatypes';

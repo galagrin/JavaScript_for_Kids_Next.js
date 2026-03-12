@@ -1,181 +1,178 @@
-import { renderHook, act } from '@testing-library/react'
-import { fetchArrays } from '@/shared/api/apiBase'
-
+import { act, renderHook } from '@testing-library/react';
 // Создаем простой мок store без persist middleware для тестирования
-import { create } from 'zustand'
-import { ArraysActions, ArraysState } from '../types'
+import { create } from 'zustand';
+
+import { fetchArrays } from '@/shared/api/apiBase';
+
+import { ArraysActions, ArraysState } from '../types';
 
 // Мокаем API
 jest.mock('@/shared/api/apiBase', () => ({
-  fetchArrays: jest.fn(),
-}))
+    fetchArrays: jest.fn(),
+}));
 
-const mockFetchArrays = fetchArrays as jest.MockedFunction<typeof fetchArrays>
+const mockFetchArrays = fetchArrays as jest.MockedFunction<typeof fetchArrays>;
 
 // Создаем тестовый store без persist для изоляции тестов
 const createTestStore = () => {
-  return create<ArraysState & ArraysActions>((set, get) => ({
-    arraysList: [],
-    loadingAllArrays: false,
-    errorAllArrays: null,
-    lastFetchTime: 0,
-    cacheExpiry: 5 * 60 * 1000,
+    return create<ArraysState & ArraysActions>((set, get) => ({
+        arraysList: [],
+        loadingAllArrays: false,
+        errorAllArrays: null,
+        lastFetchTime: 0,
+        cacheExpiry: 5 * 60 * 1000,
 
-    fetchAllArraysList: async (force = false) => {
-      const state = get()
-      const now = Date.now()
-      
-      if (!force && 
-          state.arraysList.length > 0 && 
-          (now - state.lastFetchTime) < state.cacheExpiry) {
-        return
-      }
+        fetchAllArraysList: async (force = false) => {
+            const state = get();
+            const now = Date.now();
 
-      set({ loadingAllArrays: true, errorAllArrays: null })
-      try {
-        const response = await fetchArrays()
-        set({
-          arraysList: response,
-          loadingAllArrays: false,
-          lastFetchTime: now,
-        })
-      } catch (error) {
-        set({
-          errorAllArrays: error instanceof Error ? error.message : 'Произошла ошибка при загрузке',
-          loadingAllArrays: false,
-        })
-      }
-    },
-  }))
-}
+            if (!force && state.arraysList.length > 0 && now - state.lastFetchTime < state.cacheExpiry) {
+                return;
+            }
+
+            set({ loadingAllArrays: true, errorAllArrays: null });
+            try {
+                const response = await fetchArrays();
+                set({
+                    arraysList: response,
+                    loadingAllArrays: false,
+                    lastFetchTime: now,
+                });
+            } catch (error) {
+                set({
+                    errorAllArrays: error instanceof Error ? error.message : 'Произошла ошибка при загрузке',
+                    loadingAllArrays: false,
+                });
+            }
+        },
+    }));
+};
 
 // Мокаем Date.now для контроля времени в тестах
-const mockDateNow = jest.spyOn(Date, 'now')
+const mockDateNow = jest.spyOn(Date, 'now');
 
 describe('useArraysStore', () => {
-  let useTestStore: ReturnType<typeof createTestStore>
+    let useTestStore: ReturnType<typeof createTestStore>;
 
-  beforeEach(() => {
-    jest.clearAllMocks()
-    mockDateNow.mockReturnValue(1000000)
-    useTestStore = createTestStore()
-  })
+    beforeEach(() => {
+        jest.clearAllMocks();
+        mockDateNow.mockReturnValue(1000000);
+        useTestStore = createTestStore();
+    });
 
-  afterAll(() => {
-    mockDateNow.mockRestore()
-  })
+    afterAll(() => {
+        mockDateNow.mockRestore();
+    });
 
-  it('имеет правильное начальное состояние', () => {
-    const { result } = renderHook(() => useTestStore())
-    
-    expect(result.current.arraysList).toEqual([])
-    expect(result.current.loadingAllArrays).toBe(false)
-    expect(result.current.errorAllArrays).toBe(null)
-    expect(result.current.cacheExpiry).toBe(5 * 60 * 1000)
-  })
+    it('имеет правильное начальное состояние', () => {
+        const { result } = renderHook(() => useTestStore());
 
-  it('успешно загружает данные массивов', async () => {
-    const mockArrays = [
-      {
-        id: 1,
-        name: 'push',
-        description: 'Добавляет элементы в конец массива',
-        syntax: 'array.push(element)',
-        adultExample: 'arr.push(4)',
-        childExample: 'toys.push("мячик")',
-        childExplanation: 'Добавляем новую игрушку в коробку',
-      },
-    ]
+        expect(result.current.arraysList).toEqual([]);
+        expect(result.current.loadingAllArrays).toBe(false);
+        expect(result.current.errorAllArrays).toBe(null);
+        expect(result.current.cacheExpiry).toBe(5 * 60 * 1000);
+    });
 
-    mockFetchArrays.mockResolvedValueOnce(mockArrays)
+    it('успешно загружает данные массивов', async () => {
+        const mockArrays = [
+            {
+                id: 1,
+                name: 'push',
+                description: 'Добавляет элементы в конец массива',
+                syntax: 'array.push(element)',
+                adultExample: 'arr.push(4)',
+                childExample: 'toys.push("мячик")',
+                childExplanation: 'Добавляем новую игрушку в коробку',
+            },
+        ];
 
-    const { result } = renderHook(() => useTestStore())
+        mockFetchArrays.mockResolvedValueOnce(mockArrays);
 
-    await act(async () => {
-      await result.current.fetchAllArraysList()
-    })
+        const { result } = renderHook(() => useTestStore());
 
-    expect(result.current.arraysList).toEqual(mockArrays)
-    expect(result.current.loadingAllArrays).toBe(false)
-    expect(result.current.errorAllArrays).toBe(null)
-    expect(result.current.lastFetchTime).toBe(1000000)
-    expect(mockFetchArrays).toHaveBeenCalledTimes(1)
-  })
+        await act(async () => {
+            await result.current.fetchAllArraysList();
+        });
 
-  it('обрабатывает ошибки при загрузке', async () => {
-    const errorMessage = 'Network error'
-    mockFetchArrays.mockRejectedValueOnce(new Error(errorMessage))
+        expect(result.current.arraysList).toEqual(mockArrays);
+        expect(result.current.loadingAllArrays).toBe(false);
+        expect(result.current.errorAllArrays).toBe(null);
+        expect(result.current.lastFetchTime).toBe(1000000);
+        expect(mockFetchArrays).toHaveBeenCalledTimes(1);
+    });
 
-    const { result } = renderHook(() => useTestStore())
+    it('обрабатывает ошибки при загрузке', async () => {
+        const errorMessage = 'Network error';
+        mockFetchArrays.mockRejectedValueOnce(new Error(errorMessage));
 
-    await act(async () => {
-      await result.current.fetchAllArraysList()
-    })
+        const { result } = renderHook(() => useTestStore());
 
-    expect(result.current.arraysList).toEqual([])
-    expect(result.current.loadingAllArrays).toBe(false)
-    expect(result.current.errorAllArrays).toBe(errorMessage)
-  })
+        await act(async () => {
+            await result.current.fetchAllArraysList();
+        });
 
-  it('обрабатывает не-Error объекты в catch блоке', async () => {
-    mockFetchArrays.mockRejectedValueOnce('String error')
+        expect(result.current.arraysList).toEqual([]);
+        expect(result.current.loadingAllArrays).toBe(false);
+        expect(result.current.errorAllArrays).toBe(errorMessage);
+    });
 
-    const { result } = renderHook(() => useTestStore())
+    it('обрабатывает не-Error объекты в catch блоке', async () => {
+        mockFetchArrays.mockRejectedValueOnce('String error');
 
-    await act(async () => {
-      await result.current.fetchAllArraysList()
-    })
+        const { result } = renderHook(() => useTestStore());
 
-    expect(result.current.errorAllArrays).toBe('Произошла ошибка при загрузке')
-  })
+        await act(async () => {
+            await result.current.fetchAllArraysList();
+        });
 
-  it('использует кэш если данные свежие', async () => {
-    const mockArrays = [{ id: 1, name: 'test' }] as any[]
-    
-    mockFetchArrays.mockResolvedValueOnce(mockArrays)
+        expect(result.current.errorAllArrays).toBe('Произошла ошибка при загрузке');
+    });
 
-    const { result } = renderHook(() => useTestStore())
+    it('использует кэш если данные свежие', async () => {
+        const mockArrays = [{ id: 1, name: 'test' }] as any[];
 
-    // Первый запрос - загружаем данные
-    await act(async () => {
-      await result.current.fetchAllArraysList()
-    })
+        mockFetchArrays.mockResolvedValueOnce(mockArrays);
 
-    expect(mockFetchArrays).toHaveBeenCalledTimes(1)
+        const { result } = renderHook(() => useTestStore());
 
-    // Второй запрос - должен использовать кэш
-    await act(async () => {
-      await result.current.fetchAllArraysList()
-    })
+        // Первый запрос - загружаем данные
+        await act(async () => {
+            await result.current.fetchAllArraysList();
+        });
 
-    // API не должен быть вызван повторно
-    expect(mockFetchArrays).toHaveBeenCalledTimes(1)
-    expect(result.current.arraysList).toEqual(mockArrays)
-  })
+        expect(mockFetchArrays).toHaveBeenCalledTimes(1);
 
-  it('игнорирует кэш при force=true', async () => {
-    const firstArrays = [{ id: 1, name: 'first' }] as any[]
-    const secondArrays = [{ id: 2, name: 'second' }] as any[]
-    
-    mockFetchArrays
-      .mockResolvedValueOnce(firstArrays)
-      .mockResolvedValueOnce(secondArrays)
+        // Второй запрос - должен использовать кэш
+        await act(async () => {
+            await result.current.fetchAllArraysList();
+        });
 
-    const { result } = renderHook(() => useTestStore())
+        // API не должен быть вызван повторно
+        expect(mockFetchArrays).toHaveBeenCalledTimes(1);
+        expect(result.current.arraysList).toEqual(mockArrays);
+    });
 
-    // Первый запрос
-    await act(async () => {
-      await result.current.fetchAllArraysList()
-    })
+    it('игнорирует кэш при force=true', async () => {
+        const firstArrays = [{ id: 1, name: 'first' }] as any[];
+        const secondArrays = [{ id: 2, name: 'second' }] as any[];
 
-    expect(result.current.arraysList).toEqual(firstArrays)
+        mockFetchArrays.mockResolvedValueOnce(firstArrays).mockResolvedValueOnce(secondArrays);
 
-    // Второй запрос с force=true
-    await act(async () => {
-      await result.current.fetchAllArraysList(true)
-    })
+        const { result } = renderHook(() => useTestStore());
 
-    expect(mockFetchArrays).toHaveBeenCalledTimes(2)
-    expect(result.current.arraysList).toEqual(secondArrays)
-  })
-})
+        // Первый запрос
+        await act(async () => {
+            await result.current.fetchAllArraysList();
+        });
+
+        expect(result.current.arraysList).toEqual(firstArrays);
+
+        // Второй запрос с force=true
+        await act(async () => {
+            await result.current.fetchAllArraysList(true);
+        });
+
+        expect(mockFetchArrays).toHaveBeenCalledTimes(2);
+        expect(result.current.arraysList).toEqual(secondArrays);
+    });
+});

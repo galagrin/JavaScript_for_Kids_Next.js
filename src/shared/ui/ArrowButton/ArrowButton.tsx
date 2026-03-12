@@ -23,7 +23,7 @@ export const ArrowButton = ({ onClick, direction }: ArrowButtonProps) => {
     }, [onClick, direction]);
 
     const Icon = direction === 'Left' ? CgArrowLeftO : CgArrowRightO;
-    
+
     return (
         <IconContext.Provider value={{ size: '2em' }}>
             <div>

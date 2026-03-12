@@ -37,4 +37,4 @@ export const useNumbersStore = create<NumbersStore>()(
             }),
         }
     )
-); 
+);

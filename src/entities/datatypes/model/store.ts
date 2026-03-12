@@ -37,4 +37,4 @@ export const useDataTypesStore = create<DataTypesStore>()(
             }),
         }
     )
-); 
+);

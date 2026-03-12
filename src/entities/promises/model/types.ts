@@ -8,4 +8,4 @@ export interface PromisesState {
 
 export interface PromisesActions {
     fetchAllPromisesList: () => Promise<void>;
-} 
+}

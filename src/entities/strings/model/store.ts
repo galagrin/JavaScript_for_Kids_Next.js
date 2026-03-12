@@ -37,4 +37,4 @@ export const useStringsStore = create<StringsStore>()(
             }),
         }
     )
-); 
+);

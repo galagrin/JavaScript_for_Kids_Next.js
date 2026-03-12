@@ -8,4 +8,4 @@ export interface DatesState {
 
 export interface DatesActions {
     fetchAllDatesList: () => Promise<void>;
-} 
+}

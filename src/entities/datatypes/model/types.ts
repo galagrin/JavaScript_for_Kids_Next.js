@@ -8,4 +8,4 @@ export interface DataTypesState {
 
 export interface DataTypesActions {
     fetchAllDataTypesList: () => Promise<void>;
-} 
+}

@@ -4,7 +4,7 @@ export interface QuizQuestion {
     description: string;
     correctAnswer: string;
     options: string[];
-    
+
     category: 'arrays' | 'strings' | 'objects' | 'dates' | 'promises' | 'numbers' | 'datatypes';
 }
 

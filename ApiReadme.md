@@ -6,7 +6,7 @@
 src/shared/api/apiBase.ts (базовый слой)
 ├── fetchApi() - общая функция
 ├── fetchArrays() - для массивов
-├── fetchStrings() - для строк  
+├── fetchStrings() - для строк
 ├── fetchObjects() - для объектов
 ├── fetchDates() - для дат
 ├── fetchPromises() - для промисов

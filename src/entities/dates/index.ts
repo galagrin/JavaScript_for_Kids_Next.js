@@ -1,2 +1,2 @@
 export { useDatesStore } from './model/store';
-export type { DatesState, DatesActions } from './model/types'; 
+export type { DatesState, DatesActions } from './model/types';
