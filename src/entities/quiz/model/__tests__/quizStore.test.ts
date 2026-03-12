@@ -286,6 +286,7 @@ describe('useQuizStore', () => {
     });
 
     it('обрабатывает ошибки при загрузке методов', async () => {
+        const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
         mockFetchArrays.mockRejectedValueOnce(new Error('Network error'));
         mockFetchStrings.mockRejectedValueOnce(new Error('Network error'));
         mockFetchObjects.mockRejectedValueOnce(new Error('Network error'));
@@ -302,6 +303,7 @@ describe('useQuizStore', () => {
 
         expect(result.current.loading).toBe(false);
         expect(result.current.error).toBe('Не удалось загрузить данные для викторины');
+        consoleWarnSpy.mockRestore();
     });
 
     it('запускает игру и генерирует первый вопрос', () => {
