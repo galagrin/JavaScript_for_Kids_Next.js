@@ -19,11 +19,9 @@ export const useArraysStore = create<ArrayStore>()(
             fetchAllArraysList: async (force = false) => {
                 const state = get();
                 const now = Date.now();
-                
+
                 // Проверяем кэш и время последнего запроса
-                if (!force && 
-                    state.arraysList.length > 0 && 
-                    (now - state.lastFetchTime) < state.cacheExpiry) {
+                if (!force && state.arraysList.length > 0 && now - state.lastFetchTime < state.cacheExpiry) {
                     return; // Используем кэшированные данные
                 }
 

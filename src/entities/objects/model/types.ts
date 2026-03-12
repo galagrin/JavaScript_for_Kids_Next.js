@@ -8,4 +8,4 @@ export interface ObjectsState {
 
 export interface ObjectsActions {
     fetchAllObjectsList: () => Promise<void>;
-} 
+}

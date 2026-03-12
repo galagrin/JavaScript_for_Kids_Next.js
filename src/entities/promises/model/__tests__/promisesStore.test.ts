@@ -58,9 +58,9 @@ describe('usePromisesStore', () => {
                 name: 'Promise.resolve',
                 description: 'Создает промис, который немедленно разрешается с указанным значением.',
                 syntax: 'Promise.resolve(value)',
-                adultExample: "Promise.resolve(42).then(x => console.log(x)); // 42",
+                adultExample: 'Promise.resolve(42).then(x => console.log(x)); // 42',
                 childExample: "Promise.resolve('привет').then(слово => console.log(слово)); // привет",
-                childExplanation: "Это как если бы ты сразу получил подарок, который тебе обещали.",
+                childExplanation: 'Это как если бы ты сразу получил подарок, который тебе обещали.',
             },
         ];
         mockFetchPromises.mockResolvedValueOnce(mockData);

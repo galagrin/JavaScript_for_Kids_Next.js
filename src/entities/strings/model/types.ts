@@ -8,4 +8,4 @@ export interface StringsState {
 
 export interface StringsActions {
     fetchAllStringsList: () => Promise<void>;
-} 
+}

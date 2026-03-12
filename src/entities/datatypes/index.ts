@@ -1,2 +1,2 @@
 export { useDataTypesStore } from './model/store';
-export type { DataTypesState, DataTypesActions } from './model/types'; 
+export type { DataTypesState, DataTypesActions } from './model/types';

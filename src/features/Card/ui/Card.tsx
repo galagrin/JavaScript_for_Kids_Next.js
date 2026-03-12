@@ -16,8 +16,8 @@ export const Card = ({ data, isFlipped, setIsFlipped, rolledOut }: CardProps<Car
 
     return (
         <div className={`${styles.scene} ${rolledOut ? styles.rollOut : ''}`}>
-            <div 
-                className={`${styles.card} ${isFlipped ? styles.isFlipped : ''}`} 
+            <div
+                className={`${styles.card} ${isFlipped ? styles.isFlipped : ''}`}
                 onClick={handleClick}
                 role="button"
                 tabIndex={0}

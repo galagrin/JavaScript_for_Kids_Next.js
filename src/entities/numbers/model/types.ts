@@ -8,4 +8,4 @@ export interface NumbersState {
 
 export interface NumbersActions {
     fetchAllNumbersList: () => Promise<void>;
-} 
+}
