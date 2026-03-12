@@ -9,7 +9,10 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+html,
+body {
+    overflow-x: hidden;
+}
 :root {
     --background: #f9f9fb;
     --foreground: #171717;
